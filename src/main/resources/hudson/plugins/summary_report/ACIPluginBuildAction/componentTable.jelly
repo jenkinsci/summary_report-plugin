@@ -12,8 +12,7 @@
         <j:forEach var="o" items="${b.trList}">
             <tr>
                 <j:forEach var="p" items="${o.tdList}">
-                    <td style="width:${p.width}; background-color:${p.bgColor};"
-                        align ="${p.align}">
+                    <td style="width:${p.width}; background-color:${p.bgColor};" title="${p.title}" align="${p.align}">
                         <j:if test="${p.tdValue != null}">
                             <j:set var="phref" value="${p.href}"/>
                             <j:if test="${p.href != null}" >

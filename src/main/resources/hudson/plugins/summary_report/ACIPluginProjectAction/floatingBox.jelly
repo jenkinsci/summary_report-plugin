@@ -10,10 +10,10 @@ xmlns:t="/lib/hudson" xmlns:st="jelly:stapler">
     <script type="text/javascript" src="${rootURL}/plugin/summary_report/lib/jquery/js/jquery-ui-1.8.6.custom.min.js"></script>
     <script type="text/javascript" src="${rootURL}/plugin/summary_report/lib/jquery.cookie.js"></script>
     
-    <div align="left" style="width:900px;">
+    <div align="right">
     <table>
         <tr>
-            <h1>Result of build #${from.getLastFinishedBuild().getNumber()}</h1>
+            <h1 align="center">Result of build #${from.getLastFinishedBuild().getNumber()}</h1>
         </tr>
         <tr>
             <td>

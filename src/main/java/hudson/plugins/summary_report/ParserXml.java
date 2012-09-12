@@ -229,6 +229,7 @@ public class ParserXml {
                 tmpTd.setBgColor(attributes.getValue("bgcolor"));
                 tmpTd.setFontColor(attributes.getValue("fontcolor"));
                 tmpTd.setFontAttribute(attributes.getValue("fontattribute"));
+                tmpTd.setTitle(attributes.getValue("title"));
                 tmpTd.setHref(attributes.getValue("href"));
                 tmpTd.setAlign(attributes.getValue("align"));
                 tmpTd.setWidth(attributes.getValue("width"));

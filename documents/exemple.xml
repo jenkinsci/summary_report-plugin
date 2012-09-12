@@ -1,0 +1,40 @@
+<section name="Performance Summary" line="0" column="0">
+<field name="Field Name To Display" titlecolor="black" value="My Field Value" detailcolor="#000000" href="artifacts/field.txt">
+	<![CDATA[
+		....TEXT....
+		<a href="http://....">Link to something</a>
+		...Some more text...
+	 ]]>
+</field>
+<table sorttable="yes">
+        <tr>
+                <td value="Table title" bgcolor="red" fontcolor="black" fontattribute="bold" title="Title1" href="report.xls" align="center" width="200"/>
+                <td value="Column 1" bgcolor="white" fontcolor="black" fontattribute="normal" title="Title2" href="" align="center" width="200"/>
+        </tr>
+        <tr>
+                <td value="Line 1" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="left" width="200"/>
+                <td value="Value 1" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="none" width="200"/>
+        </tr>
+</table>
+<tabs>
+	<tab name="First tab">
+		<field name="Build status" value="All target succeeded" />
+		<field name="Functionnal status" value="Validation is Ok" />
+	</tab>
+	<tab name="Second tab">
+		<table>
+			<tr>
+				<td value="Table title" bgcolor="red" fontcolor="black" title="Title1" fontattribute="bold" href="report.xls" align="center" width="200"/>
+				<td value="Column 1" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="center" width="200"/>
+			</tr>
+			<tr>
+				<td value="Line 1" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="left" width="200"/>
+				<td value="Value 1" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="none" width="200"/>
+			</tr>
+		</table>
+	</tab>
+</tabs>
+
+</section>
+
+
