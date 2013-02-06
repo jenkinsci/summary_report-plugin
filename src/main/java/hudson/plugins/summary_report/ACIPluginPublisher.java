@@ -119,9 +119,14 @@ public class ACIPluginPublisher extends Recorder {
 			fileSet.setIncludes(files[i].trim());
 			Project antProject = new Project();
 			fileSet.setProject(antProject);
-			String[] tmpFiles = fileSet.getDirectoryScanner(antProject)
+			String[] tmpFiles = new String[] {};
+			try {
+				tmpFiles = fileSet.getDirectoryScanner(antProject)
 					.getIncludedFiles();
-
+			} catch (Exception ex) {
+				listener.getLogger().println(ex.toString());
+				return false;
+			}
 			for (int j = 0; j < tmpFiles.length; j++) {
 				filesToParse.add(tmpFiles[j]);
 			}

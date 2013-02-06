@@ -13,7 +13,7 @@ xmlns:t="/lib/hudson" xmlns:st="jelly:stapler">
     <script type="text/javascript" src="${rootURL}/plugin/summary_report/lib/jquery/js/jquery-ui-1.8.6.custom.min.js"></script>
     <script type="text/javascript" src="${rootURL}/plugin/summary_report/lib/jquery.cookie.js"></script>
     <script type="text/javascript" src="${rootURL}/plugin/summary_report/lib/jquery.tablesorter.min.js"></script>
-    
+
     <div class="summary_report_project">
         <h1>Result of build #${from.getLastFinishedBuild().getNumber()}</h1>
 
@@ -22,39 +22,43 @@ xmlns:t="/lib/hudson" xmlns:st="jelly:stapler">
         <j:set var="buildnumber" value="${from.getLastFinishedBuild().getNumber()}"/>
 
         <!-- For each file .xml-->
-        <j:forEach var="a" items="${from.getReport().getSection()}" indexVar="indexA">
+        <j:if test="from.getReport() != null" >
+            <j:forEach var="a" items="${from.getReport().getSection()}" indexVar="indexA">
 
-            <h2 style="color:${a.fontColor};">${a.sectionName}</h2>
+                <h2 style="color:${a.fontColor};">${a.sectionName}</h2>
 
-            <!-- For each object in the section -->
-            <j:forEach var="b" items="${a.objectList}" indexVar="indexB">
+                <!-- For each object in the section -->
+                <j:forEach var="b" items="${a.objectList}" indexVar="indexB">
 
-                <!-- If the object is a table -->
-                <j:if test="${b.status == 'table'}">
-                    <st:include class="hudson.plugins.summary_report.ACIPluginBuildAction" page="componentTable.jelly" />
-                </j:if>
+                    <!-- If the object is a table -->
+                    <j:if test="${b.status == 'table'}">
+                        <st:include class="hudson.plugins.summary_report.ACIPluginBuildAction" page="componentTable.jelly" />
+                    </j:if>
 
-                <!-- If the object is a field -->
-                <j:if test="${b.status == 'field'}">
-                    <st:include class="hudson.plugins.summary_report.ACIPluginBuildAction" page="componentField.jelly" />
-                </j:if>
+                    <!-- If the object is a field -->
+                    <j:if test="${b.status == 'field'}">
+                        <st:include class="hudson.plugins.summary_report.ACIPluginBuildAction" page="componentField.jelly" />
+                    </j:if>
 
-                <!-- If the object is an accordion -->
-                <j:if test="${b.status == 'accordion'}">
-                    <st:include class="hudson.plugins.summary_report.ACIPluginBuildAction" page="componentAccordion.jelly" />
-                </j:if>
+                    <!-- If the object is an accordion -->
+                    <j:if test="${b.status == 'accordion'}">
+                        <st:include class="hudson.plugins.summary_report.ACIPluginBuildAction" page="componentAccordion.jelly" />
+                    </j:if>
 
-                 <!-- If the object is a tab -->
-                <j:if test="${b.status == 'tabs'}">
-                    <st:include class="hudson.plugins.summary_report.ACIPluginBuildAction" page="componentTabs.jelly" />
-                </j:if>
+                     <!-- If the object is a tab -->
+                    <j:if test="${b.status == 'tabs'}">
+                        <st:include class="hudson.plugins.summary_report.ACIPluginBuildAction" page="componentTabs.jelly" />
+                    </j:if>
+
+                </j:forEach>
 
             </j:forEach>
-
-        </j:forEach>
+        </j:if>
         <!-- For each fileError-->
-        <j:forEach var="c" items="${from.getFileError()}" indexVar="indexC">
-            <h2 style="color:${c[0]};">${c[1]}: <a style="color:${c[2]};" href="${c[3]}">${c[5]}</a></h2>
-        </j:forEach>
+        <j:if test="from != null">
+            <j:forEach var="c" items="${from.getFileError()}" indexVar="indexC">
+                <h2 style="color:${c[0]};">${c[1]}: <a style="color:${c[2]};" href="${c[3]}">${c[5]}</a></h2>
+            </j:forEach>
+        </j:if>
     </div>
 </j:jelly>

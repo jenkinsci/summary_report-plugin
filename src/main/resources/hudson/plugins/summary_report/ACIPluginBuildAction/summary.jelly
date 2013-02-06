@@ -69,9 +69,11 @@ xmlns:t="/lib/hudson" xmlns:st="jelly:stapler">
                 </j:forEach>
                 
                 <!-- For each fileError-->
-                <j:forEach var="c" items="${from.getFileError()}" indexVar="indexC">
-                    <h2 style="color:${c[0]};">${c[1]}: <a style="color:${c[2]};" href="${c[4]}">${c[5]}</a></h2>
-                </j:forEach>
+                <j:if test="from != null">
+                    <j:forEach var="c" items="${from.getFileError()}" indexVar="indexC">
+                        <h2 style="color:${c[0]};">${c[1]}: <a style="color:${c[2]};" href="${c[4]}">${c[5]}</a></h2>
+                    </j:forEach>
+                </j:if>
             </div>
         </td>
     </tr>

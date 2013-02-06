@@ -2,11 +2,11 @@
     <div class="summary_report_field" style="color:${b.titleColor};">
         <span>${b.fieldName}</span>
         <span style="color:${b.detailColor};">
-            <j:if test="${b.href.substring(0,7) == 'http://'}" >
+            <j:if  test="${(b.href != null) &amp;&amp; (b.href.length() > 6) &amp;&amp; (b.href.substring(0,7) == 'http://')}" >
                 <a href="${b.href}">${b.fieldValue}</a>
             </j:if>
 
-            <j:if test="${b.href.substring(0,8) == 'https://'}" >
+            <j:if test="${(b.href != null) &amp;&amp; (b.href.length() > 7) &amp;&amp; (b.href.substring(0,8) == 'https://')}" >
                 <a href="${b.href}">${b.fieldValue}</a>
             </j:if>
 
@@ -14,7 +14,7 @@
                 ${b.fieldValue}
             </j:if>
 
-            <j:if test="${(b.href != null) &amp;&amp; (b.href.substring(0,7) != 'http://') &amp;&amp; (b.href.substring(0,8) != 'https://')}" >
+            <j:if test="${(b.href != null) &amp;&amp; (b.href.length() > 6) &amp;&amp; (b.href.substring(0,7) != 'http://') &amp;&amp; (b.href.substring(0,8) != 'https://')}" >
                 <a href="${buildn}${b.href}">${b.fieldValue}</a>
             </j:if>
         </span>
