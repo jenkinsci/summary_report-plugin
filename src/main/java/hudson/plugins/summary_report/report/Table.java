@@ -30,77 +30,75 @@ import java.util.ArrayList;
  */
 public class Table {
 
-	private String status;
-	private ArrayList<Tr> trList;
-	private String sorttable;
+    private String status;
+    private ArrayList<Tr> trList;
+    private String sorttable;
 
-	/**
-	 * Constructor.
-	 */
-	public Table() {
-		trList = new ArrayList<Tr>();
-		status = "table";
-	}
+    /**
+     * Constructor.
+     */
+    public Table() {
+        trList = new ArrayList<Tr>();
+        status = "table";
+    }
 
-	/**
-	 * Get the status.
-	 * @return the status
-	 */
-	public String getStatus() {
-		return status;
-	}
+    /**
+     * Get the status.
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
 
-	/**
-	 * Set the status.
-	 * @param status
-	 *		the status to set
-	 */
-	public void setStatus(final String status) {
-		this.status = status;
+    /**
+     * Set the status.
+     * @param status
+     *		the status to set
+     */
+    public void setStatus(final String status) {
+        this.status = status;
+    }
 
-	}
+    /**
+     * Get the list of rows.
+     * @return the trList
+     */
+    public ArrayList<Tr> getTrList() {
+        return trList;
+    }
 
-	/**
-	 * Get the list of rows.
-	 * @return the trList
-	 */
-	public ArrayList<Tr> getTrList() {
-		return trList;
-	}
+    /**
+     * Set the list of rows.
+     * @param trList
+     *		the trList to set
+     */
+    public void setTrList(final ArrayList<Tr> trList) {
+        this.trList = trList;
+    }
 
-	/**
-	 * Set the list of rows.
-	 * @param trList
-	 *		the trList to set
-	 */
-	public void setTrList(final ArrayList<Tr> trList) {
-		this.trList = trList;
-	}
+    /**
+     * Return if the table can be sorted.
+     * @return the sorttable
+     */
+    public String getSorttable() {
+        return sorttable;
+    }
 
-	/**
-	 * Return if the table can be sorted.
-	 * @return the sorttable
-	 */
-	public String getSorttable() {
-		return sorttable;
-	}
+    /**
+     * Set the current table sortable.
+     * @param sorttable
+     * 		the sorttable to set
+     */
+    public void setSorttable(final String sorttable) {
+        this.sorttable = sorttable;
+    }
 
-	/**
-	 * Set the current table sortable.
-	 * @param sorttable
-	 * 		the sorttable to set
-	 */
-	public void setSorttable(final String sorttable) {
-		this.sorttable = sorttable;
-
-	}
-
-	/**
-	 * Add a row to the current list of rows.
-	 * @param tr
-	 * 		the row to add.
-	 */
-	public void addTr(final Tr tr) {
-		this.trList.add(tr);
-	}
+    /**
+     * Add a row to the current list of rows.
+     * @param tr
+     * 		the row to add.
+     */
+    public void addTr(final Tr tr) {
+        this.trList.add(tr);
+    }
 }

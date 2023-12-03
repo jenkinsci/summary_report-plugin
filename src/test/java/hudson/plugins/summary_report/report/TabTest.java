@@ -1,8 +1,9 @@
 package hudson.plugins.summary_report.report;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -10,9 +11,7 @@ import static org.junit.Assert.*;
  */
 public class TabTest {
 
-    public TabTest() {
-    }
-
+    public TabTest() {}
 
     /**
      * Test of Status methods, of class Tab.
@@ -32,7 +31,7 @@ public class TabTest {
         assertEquals(expResult, instance.getStatus());
     }
 
-     /**
+    /**
      * Test of TabName methods, of class Tab.
      */
     @Test
@@ -70,7 +69,7 @@ public class TabTest {
         // the objectList is empty
         assertEquals(objectList, instance.getObjectList());
 
-         /**************/
+        /**************/
         /** Phase 2  **/
         /**************/
         objectList.add(obj1);
@@ -80,7 +79,7 @@ public class TabTest {
         // Test of setter
         assertEquals(objectList, instance.getObjectList());
 
-         /**************/
+        /**************/
         /** Phase 3  **/
         /**************/
         // Creation of empty objectList

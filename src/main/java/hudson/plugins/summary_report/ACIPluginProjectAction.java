@@ -23,39 +23,39 @@
  */
 package hudson.plugins.summary_report;
 
-import hudson.model.Action;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import hudson.model.AbstractBuild;
 import hudson.model.AbstractProject;
-import hudson.plugins.summary_report.report.Report;
-import hudson.util.DescribableList;
-import hudson.tasks.Publisher;
+import hudson.model.Action;
 import hudson.model.Descriptor;
-
+import hudson.plugins.summary_report.report.Report;
+import hudson.tasks.Publisher;
+import hudson.util.DescribableList;
 import java.io.Serializable;
 import java.util.ArrayList;
-
 
 /**
  * Action to perform at project page.
  */
+@SuppressFBWarnings(value = "SE_BAD_FIELD", justification = "need to be fixed")
 public class ACIPluginProjectAction implements Action, Serializable {
 
     /**
-	 * Version ID.
-	 */
-	private static final long serialVersionUID = 1L;
+     * Version ID.
+     */
+    private static final long serialVersionUID = 1L;
 
-	/**
+    /**
      * Name of the URL where results are available.
      */
-	public static final String URL_NAME = "aciResult";
+    public static final String URL_NAME = "aciResult";
 
-	/**
+    /**
      * Project structure.
      */
-	private AbstractProject<?, ?> project;
+    private AbstractProject<?, ?> project;
 
-	/**
+    /**
      * Assign project.
      *
      * @param project
@@ -87,7 +87,7 @@ public class ACIPluginProjectAction implements Action, Serializable {
      * @return null
      */
     public String getDisplayName() {
-//        return "ACIProjectAction";
+        //        return "ACIProjectAction";
         return null;
     }
     /**
@@ -99,8 +99,8 @@ public class ACIPluginProjectAction implements Action, Serializable {
      *
      * @return null
      */
-   public String getUrlName() {
-//        return URL_NAME;
+    public String getUrlName() {
+        //        return URL_NAME;
         return null;
     }
 
@@ -113,8 +113,8 @@ public class ACIPluginProjectAction implements Action, Serializable {
      */
     public AbstractBuild<?, ?> getLastFinishedBuild() {
         AbstractBuild<?, ?> lastBuild = project.getLastBuild();
-        while (lastBuild != null && (lastBuild.isBuilding()
-        		|| lastBuild.getAction(ACIPluginBuildAction.class) == null)) {
+        while (lastBuild != null
+                && (lastBuild.isBuilding() || lastBuild.getAction(ACIPluginBuildAction.class) == null)) {
             lastBuild = lastBuild.getPreviousCompletedBuild();
         }
         return lastBuild;
@@ -127,14 +127,13 @@ public class ACIPluginProjectAction implements Action, Serializable {
      * 		The last Report
      */
     public Report getReport() {
-       AbstractBuild<?, ?> build = getLastFinishedBuild();
-       // When the project has not had a build yet, build is null
-       if (build == null) {
-           return null;
-       }
-       ACIPluginBuildAction resultAction =
-           build.getAction(ACIPluginBuildAction.class);
-       return resultAction.getReport();
+        AbstractBuild<?, ?> build = getLastFinishedBuild();
+        // When the project has not had a build yet, build is null
+        if (build == null) {
+            return null;
+        }
+        ACIPluginBuildAction resultAction = build.getAction(ACIPluginBuildAction.class);
+        return resultAction.getReport();
     }
 
     /**
@@ -143,14 +142,13 @@ public class ACIPluginProjectAction implements Action, Serializable {
      * @return fileerror
      * 		The last FileError
      */
-    public ArrayList< ArrayList<String> > getFileError() {
+    public ArrayList<ArrayList<String>> getFileError() {
         AbstractBuild<?, ?> build = getLastFinishedBuild();
         // When the project has not had a build yet, build is null
         if (build == null) {
             return null;
         }
-        ACIPluginBuildAction resultAction =
-            build.getAction(ACIPluginBuildAction.class);
+        ACIPluginBuildAction resultAction = build.getAction(ACIPluginBuildAction.class);
         return resultAction.getFileError();
     }
 
@@ -160,7 +158,7 @@ public class ACIPluginProjectAction implements Action, Serializable {
      * @return name
      * 		The project name
      */
-     public String getProjectName() {
+    public String getProjectName() {
         String str = project.getName();
         str = str.replace(".", "dot");
         return str;
@@ -173,11 +171,9 @@ public class ACIPluginProjectAction implements Action, Serializable {
      * @return shownOnProjectPage
      *                 The project name
      */
-     public boolean isShownOnProjectPage() {
-       DescribableList<Publisher, Descriptor<Publisher>> publishers =
-    		   project.getPublishersList();
-       ACIPluginPublisher publisher =
-    		   publishers.get(ACIPluginPublisher.class);
-       return publisher.isShownOnProjectPage();
-     }
+    public boolean isShownOnProjectPage() {
+        DescribableList<Publisher, Descriptor<Publisher>> publishers = project.getPublishersList();
+        ACIPluginPublisher publisher = publishers.get(ACIPluginPublisher.class);
+        return publisher.isShownOnProjectPage();
+    }
 }

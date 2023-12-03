@@ -1,8 +1,9 @@
 package hudson.plugins.summary_report.report;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -10,8 +11,7 @@ import static org.junit.Assert.*;
  */
 public class SectionTest {
 
-    public SectionTest() {
-    }
+    public SectionTest() {}
 
     /**
      * Test of SectionName methods, of class Section.
@@ -63,8 +63,7 @@ public class SectionTest {
         // Test of setter
         assertEquals(expResult, instance.getColumn());
     }
-    
-   
+
     /**
      * Test of ObjectList methods, of class Section.
      */
@@ -86,7 +85,7 @@ public class SectionTest {
         // the objectList is empty
         assertEquals(objectList, instance.getObjectList());
 
-         /**************/
+        /**************/
         /** Phase 2  **/
         /**************/
         objectList.add(obj1);
@@ -96,7 +95,7 @@ public class SectionTest {
         // Test of setter
         assertEquals(objectList, instance.getObjectList());
 
-         /**************/
+        /**************/
         /** Phase 3  **/
         /**************/
         // Creation of empty objectList

@@ -28,144 +28,141 @@ package hudson.plugins.summary_report.report;
  */
 public class Field {
 
-	private String status;
-	private String fieldName;
-	private String fieldValue;
-	private String cdata;
-	private String href;
-	private String titleColor;
-	private String detailColor;
+    private String status;
+    private String fieldName;
+    private String fieldValue;
+    private String cdata;
+    private String href;
+    private String titleColor;
+    private String detailColor;
 
-	/**
-	 * Constructor.
-	 */
-	public Field() {
-		status = "field";
-	}
+    /**
+     * Constructor.
+     */
+    public Field() {
+        status = "field";
+    }
 
-	/**
-	 * Get the status.
-	 * @return the status
-	 */
-	public String getStatus() {
-		return status;
-	}
+    /**
+     * Get the status.
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
 
-	/**
-	 * Set the status.
-	 * @param status
-	 *            the status to set
-	 */
-	public void setStatus(final String status) {
-		this.status = status;
+    /**
+     * Set the status.
+     * @param status
+     *            the status to set
+     */
+    public void setStatus(final String status) {
+        this.status = status;
+    }
 
-	}
+    /**
+     * Get Field Name.
+     * @return the fieldName
+     */
+    public String getFieldName() {
+        return fieldName;
+    }
 
-	/**
-	 * Get Field Name.
-	 * @return the fieldName
-	 */
-	public String getFieldName() {
-		return fieldName;
-	}
+    /**
+     * Set the name of the field.
+     * @param fieldName
+     * 		the fieldName to set
+     */
+    public void setFieldName(final String fieldName) {
+        this.fieldName = fieldName;
+    }
 
-	/**
-	 * Set the name of the field.
-	 * @param fieldName
-	 * 		the fieldName to set
-	 */
-	public void setFieldName(final String fieldName) {
-		this.fieldName = fieldName;
+    /**
+     * Get the value of the field.
+     * @return the fieldValue
+     */
+    public String getFieldValue() {
+        return fieldValue;
+    }
 
-	}
+    /**
+     * Set the value of the field.
+     * @param fieldValue
+     *		the fieldValue to set
+     */
+    public void setFieldValue(final String fieldValue) {
+        this.fieldValue = fieldValue;
+    }
 
-	/**
-	 * Get the value of the field.
-	 * @return the fieldValue
-	 */
-	public String getFieldValue() {
-		return fieldValue;
-	}
+    /**
+     * Get cdata section of the field.
+     * @return The cdata section
+     */
+    public String getCdata() {
+        return cdata;
+    }
 
-	/**
-	 * Set the value of the field.
-	 * @param fieldValue
-	 *		the fieldValue to set
-	 */
-	public void setFieldValue(final String fieldValue) {
-		this.fieldValue = fieldValue;
+    /**
+     * Set cdata section of the field.
+     * @param cdata
+     * 		The cdata section to set
+     */
+    public void setCdata(final String cdata) {
+        if (this.cdata == null) {
+            this.cdata = cdata;
+        } else {
+            this.cdata = this.cdata + cdata;
+        }
+    }
 
-	}
+    /**
+     * Get the hyperlink reference the field.
+     * @return the ref
+     */
+    public String getHref() {
+        return href;
+    }
 
-	/**
-	 * Get cdata section of the field.
-	 * @return The cdata section
-	 */
-	public String getCdata() {
-		return cdata;
-	}
+    /**
+     * Set the hyperlink reference the field.
+     * @param href
+     * 		the ref to set
+     */
+    public void setHref(final String href) {
+        this.href = href;
+    }
 
-	/**
-	 * Set cdata section of the field.
-	 * @param cdata
-	 * 		The cdata section to set
-	 */
-	public void setCdata(final String cdata) {
-		if (this.cdata == null) {
-			this.cdata = cdata;
-		} else {
-			this.cdata = this.cdata + cdata;
-		}
-	}
+    /**
+     * Get the title color of the field.
+     * @return the titleColor
+     */
+    public String getTitleColor() {
+        return titleColor;
+    }
 
-	/**
-	 * Get the hyperlink reference the field.
-	 * @return the ref
-	 */
-	public String getHref() {
-		return href;
-	}
+    /**
+     * Set the title color of the field.
+     * @param titleColor
+     *		The titleColor to set
+     */
+    public void setTitleColor(final String titleColor) {
+        this.titleColor = titleColor;
+    }
 
-	/**
-	 * Set the hyperlink reference the field.
-	 * @param href
-	 * 		the ref to set
-	 */
-	public void setHref(final String href) {
-		this.href = href;
-	}
+    /**
+     * Get the value color of the field.
+     * @return the detailColor
+     */
+    public String getDetailColor() {
+        return detailColor;
+    }
 
-	/**
-	 * Get the title color of the field.
-	 * @return the titleColor
-	 */
-	public String getTitleColor() {
-		return titleColor;
-	}
-
-	/**
-	 * Set the title color of the field.
-	 * @param titleColor
-	 *		The titleColor to set
-	 */
-	public void setTitleColor(final String titleColor) {
-		this.titleColor = titleColor;
-	}
-
-	/**
-	 * Get the value color of the field.
-	 * @return the detailColor
-	 */
-	public String getDetailColor() {
-		return detailColor;
-	}
-
-	/**
-	 * Set the title color of the field.
-	 * @param detailColor
-	 * 		The detailColor to set
-	 */
-	public void setDetailColor(final String detailColor) {
-		this.detailColor = detailColor;
-	}
+    /**
+     * Set the title color of the field.
+     * @param detailColor
+     * 		The detailColor to set
+     */
+    public void setDetailColor(final String detailColor) {
+        this.detailColor = detailColor;
+    }
 }

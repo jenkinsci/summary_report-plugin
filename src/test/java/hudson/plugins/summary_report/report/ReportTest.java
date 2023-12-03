@@ -1,8 +1,9 @@
 package hudson.plugins.summary_report.report;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -10,22 +11,21 @@ import static org.junit.Assert.*;
  */
 public class ReportTest {
 
-    public ReportTest() {
-    }
+    public ReportTest() {}
 
     /**
      * Test of Section methods, of class Report.
      */
     @Test
     public void testSection() {
-        
+
         Report instance = new Report();
 
         ArrayList<Section> section = new ArrayList<Section>();
-        
+
         Section section1 = new Section();
         Section section2 = new Section();
-        
+
         assertNotSame(section1, section2);
 
         /**************/
@@ -37,7 +37,6 @@ public class ReportTest {
         /**************/
         /** Phase 2  **/
         /**************/
-
         section.add(section1);
         section.add(section2);
 

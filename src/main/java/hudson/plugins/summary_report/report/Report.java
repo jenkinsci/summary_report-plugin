@@ -31,14 +31,13 @@ import java.util.ArrayList;
  */
 public class Report {
 
-
     private ArrayList<Section> reportSection;
 
     /**
      * Initialize the section.
      */
     public Report() {
-    	reportSection = new ArrayList<Section>();
+        reportSection = new ArrayList<Section>();
     }
 
     /**

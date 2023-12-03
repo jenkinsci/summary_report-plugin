@@ -1,13 +1,38 @@
+<!--
+The MIT License
 
-<j:jelly xmlns:j="jelly:core"        xmlns:l="/lib/layout"
-xmlns:t="/lib/hudson" xmlns:st="jelly:stapler">
+Copyright 2023 Martin Pokorny.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core"
+    xmlns:l="/lib/layout"
+    xmlns:t="/lib/hudson"
+    xmlns:st="jelly:stapler">
 
     <!-- *************** -->
     <!-- Import librairy -->
     <!-- *************** -->
-    
 
-   <!-- Css -->
+
+    <!-- Css -->
     <link type="text/css" href="${rootURL}/plugin/summary_report/lib/jquery/css/smoothness/jquery-ui-1.8.6.custom.css" rel="stylesheet" />
 
     <link type="text/css" href="${rootURL}/plugin/summary_report/css/summary_report.css" rel="stylesheet" />
@@ -17,7 +42,7 @@ xmlns:t="/lib/hudson" xmlns:st="jelly:stapler">
     <script type="text/javascript" src="${rootURL}/plugin/summary_report/js/summary_report.js"></script>
     <script type="text/javascript" src="${rootURL}/plugin/summary_report/lib/jquery/js/jquery-ui-1.8.6.custom.min.js"></script>
 
-    
+
     <!-- Cookies lib -->
     <script type="text/javascript" src="${rootURL}/plugin/summary_report/lib/jquery.cookie.js"></script>
     <script type="text/javascript" src="${rootURL}/plugin/summary_report/lib/jquery.tablesorter.min.js"></script>
@@ -27,14 +52,14 @@ xmlns:t="/lib/hudson" xmlns:st="jelly:stapler">
     <!-- *************** -->
     <!--     Main        -->
     <!-- *************** -->
-    
+
     <tr>
         <td colspan="3">
             <div class="summary_report_build">
                 <j:set var="projectname" value="${from.getProjectName()}"/>
                 <j:set var="buildnumber" value="${from.getBuildNumber()}"/>
 
-                
+
                 <!-- For each file .xml-->
                 <j:forEach var="a" items="${it.report.section}" indexVar="indexA">
 
@@ -59,7 +84,7 @@ xmlns:t="/lib/hudson" xmlns:st="jelly:stapler">
                             <st:include page="/hudson/plugins/summary_report/ACIPluginBuildAction/componentAccordion.jelly" />
                         </j:if>
 
-                         <!-- If the object is a tab -->
+                        <!-- If the object is a tab -->
                         <j:if test="${b.status == 'tabs'}">
                             <st:include page="/hudson/plugins/summary_report/ACIPluginBuildAction/componentTabs.jelly" />
                         </j:if>
@@ -67,11 +92,12 @@ xmlns:t="/lib/hudson" xmlns:st="jelly:stapler">
                     </j:forEach>
 
                 </j:forEach>
-                
+
                 <!-- For each fileError-->
                 <j:if test="${from != null}">
                     <j:forEach var="c" items="${from.getFileError()}" indexVar="indexC">
-                        <h2 style="color:${c[0]};">${c[1]}: <a style="color:${c[2]};" href="${c[4]}">${c[5]}</a></h2>
+                        <h2 style="color:${c[0]};">${c[1]}: <a style="color:${c[2]};" href="${c[4]}">${c[5]}</a>
+                        </h2>
                     </j:forEach>
                 </j:if>
             </div>

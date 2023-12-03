@@ -23,16 +23,24 @@
  */
 package hudson.plugins.summary_report;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import hudson.FilePath;
 import hudson.Launcher;
 import hudson.model.*;
+import hudson.model.FreeStyleBuild;
+import hudson.model.FreeStyleProject;
 import hudson.tasks.ArtifactArchiver;
 import hudson.tasks.Builder;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import org.jvnet.hudson.test.HudsonTestCase;
+import org.junit.Rule;
+import org.junit.Test;
+import org.jvnet.hudson.test.JenkinsRule;
 import org.jvnet.hudson.test.TestBuilder;
 
 /**
@@ -40,29 +48,31 @@ import org.jvnet.hudson.test.TestBuilder;
  * @author Raynald Briand
  * @author Thomas Deruyter
  */
-public class ACIPluginPublisherTest  extends HudsonTestCase{
-    
-    public ACIPluginPublisherTest() {
-    }
+public class ACIPluginPublisherTest {
 
+    @Rule
+    public JenkinsRule j = new JenkinsRule();
+
+    public ACIPluginPublisherTest() {}
 
     /**
-     * Build test 
+     * Build test
      */
+    @Test
     public void testBuild() throws Exception {
-    	
-    	final boolean debug_info = false;
+
+        final boolean debug_info = false;
 
         /* Project creation */
-        FreeStyleProject project = createFreeStyleProject("ProjectTestBuild");
+        FreeStyleProject project = j.createFreeStyleProject("ProjectTestBuild");
         /* Verification if ProjectTestBuild is created */
         assertNotNull(project.getAllJobs());
-        assertEquals(1,  project.getAllJobs().size());
+        assertEquals(1, project.getAllJobs().size());
 
         /* Add ArtifactArchiver publisher */
         ArtifactArchiver archiver = new ArtifactArchiver("*.xml", "", true);
         project.getPublishersList().add(archiver);
-        
+
         /* Add ACIPluginPublisher publisher */
         ACIPluginPublisher publisher = new ACIPluginPublisher("*.xml", true);
         project.getPublishersList().add(publisher);
@@ -73,91 +83,94 @@ public class ACIPluginPublisherTest  extends HudsonTestCase{
         /* Create files to archive */
         Builder test = new TestBuilder() {
 
-			@Override
-			public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener)
-					throws InterruptedException, IOException {
-				FilePath workspace = build.getWorkspace();
-				workspace.deleteContents();
-				workspace.child("junit1.xml").write("<section name=\"Session1\">\n"
-						+ "   <field name=\"Field1\" value=\"Field1 succeeded\"/>\n"
-						+ "</section>", "UTF-8");
-				return true;
-			}
-		};
+            @Override
+            public boolean perform(AbstractBuild<?, ?> build, Launcher launcher, BuildListener listener)
+                    throws InterruptedException, IOException {
+                FilePath workspace = build.getWorkspace();
+                workspace.deleteContents();
+                workspace
+                        .child("junit1.xml")
+                        .write(
+                                "<section name=\"Session1\">\n"
+                                        + "   <field name=\"Field1\" value=\"Field1 succeeded\"/>\n"
+                                        + "</section>",
+                                "UTF-8");
+                return true;
+            }
+        };
         project.getBuildersList().add(test);
 
         /* Build the ProjectTestBuild */
         FreeStyleBuild build = project.scheduleBuild2(0).get();
-        assertBuildStatusSuccess(build);
+        j.assertBuildStatusSuccess(build);
 
         /* Verification of Artifacts */
         assertTrue(build.getHasArtifacts());
-        assertEquals(1,build.getArtifacts().size());
+        assertEquals(1, build.getArtifacts().size());
 
         /* Verification of output xml generate by the plugin */
         /* Methodology: - Browse line per line until summary_report tag */
         /*              - Compare lines with expected lines */
-        try{
-            
-            BufferedReader buff = new BufferedReader(
-                    new FileReader(build.getArtifactsDir()+"/../build.xml"));
-            System.out.println(build.getArtifactsDir()+"/../build.xml");
+        try {
+
+            BufferedReader buff = new BufferedReader(new FileReader(build.getArtifactsDir() + "/../build.xml"));
+            System.out.println(build.getArtifactsDir() + "/../build.xml");
             try {
                 String line;
                 boolean xmlGenerated = false;
                 while ((line = buff.readLine()) != null) {
-                	System.out.println(line);
-                    if(line.contains("<hudson.plugins.summary__report.ACIPluginBuildAction>")) {
-                    	line = buff.readLine(); 
-                    	if (debug_info) System.out.println(line);
+                    System.out.println(line);
+                    if (line.contains("<hudson.plugins.summary__report.ACIPluginBuildAction>")) {
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
                         assertTrue(line.contains("<build class=\"build\" reference=\"../../..\"/>"));
-                    	line = buff.readLine(); 
-                    	if (debug_info) System.out.println(line);
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
                         assertTrue(line.contains("<report>"));
-                    	line = buff.readLine(); 
-                    	if (debug_info) System.out.println(line);
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
                         assertTrue(line.contains("<reportSection>"));
-                    	line = buff.readLine(); 
-                    	if (debug_info) System.out.println(line);
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
                         assertTrue(line.contains("<hudson.plugins.summary__report.report.Section>"));
-                    	line = buff.readLine(); 
-                    	if (debug_info) System.out.println(line);
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
                         assertTrue(line.contains("<sectionName>Session1</sectionName>"));
-                    	line = buff.readLine(); 
-                    	if (debug_info) System.out.println(line);
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
                         assertTrue(line.contains("<objectList>"));
-                    	line = buff.readLine(); 
-                    	if (debug_info) System.out.println(line);
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
                         assertTrue(line.contains("<hudson.plugins.summary__report.report.Field>"));
-                    	line = buff.readLine(); 
-                    	if (debug_info) System.out.println(line);
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
                         assertTrue(line.contains("<status>field</status>"));
-                    	line = buff.readLine(); 
-                    	if (debug_info) System.out.println(line);
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
                         assertTrue(line.contains("<fieldName>Field1</fieldName>"));
-                    	line = buff.readLine(); 
-                    	if (debug_info) System.out.println(line);
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
                         assertTrue(line.contains("<fieldValue>Field1 succeeded</fieldValue>"));
-                    	line = buff.readLine(); 
-                    	if (debug_info) System.out.println(line);
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
                         assertTrue(line.contains("</hudson.plugins.summary__report.report.Field>"));
-                    	line = buff.readLine(); 
-                    	if (debug_info) System.out.println(line);
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
                         assertTrue(line.contains("</objectList>"));
-                    	line = buff.readLine(); 
-                    	if (debug_info) System.out.println(line);
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
                         assertTrue(line.contains("</hudson.plugins.summary__report.report.Section>"));
-                    	line = buff.readLine(); 
-                    	if (debug_info) System.out.println(line);
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
                         assertTrue(line.contains("</reportSection>"));
-                    	line = buff.readLine(); 
-                    	if (debug_info) System.out.println(line);
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
                         assertTrue(line.contains("</report>"));
-                    	line = buff.readLine(); 
-                    	if (debug_info) System.out.println(line);
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
                         assertTrue(line.contains("<fileError/>"));
-                    	line = buff.readLine(); 
-                    	if (debug_info) System.out.println(line);
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
                         assertTrue(line.contains("</hudson.plugins.summary__report.ACIPluginBuildAction>"));
                         xmlGenerated = true;
                     }
@@ -169,7 +182,5 @@ public class ACIPluginPublisherTest  extends HudsonTestCase{
         } catch (IOException ioe) {
             assertFalse("Erreur --" + ioe.toString(), true);
         }
-
     }
-
 }

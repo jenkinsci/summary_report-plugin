@@ -1,7 +1,8 @@
 package hudson.plugins.summary_report.report;
 
-import org.junit.Test;
 import static org.junit.Assert.*;
+
+import org.junit.Test;
 
 /**
  *
@@ -9,8 +10,7 @@ import static org.junit.Assert.*;
  */
 public class FieldTest {
 
-    public FieldTest() {
-    }
+    public FieldTest() {}
 
     /**
      * Test of Status methods, of class Field.
@@ -80,7 +80,7 @@ public class FieldTest {
         // Test of setter
         assertEquals(expResult, instance.getCdata());
     }
-    
+
     /**
      * Test of Href methods, of class Field.
      */
