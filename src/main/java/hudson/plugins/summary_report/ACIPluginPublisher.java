@@ -46,7 +46,7 @@ import org.xml.sax.SAXException;
 
 /**
  * ACIPluginPublisher Is the main class for
- * publishing data over build & project page.
+ * publishing data over build and project page.
  */
 @SuppressWarnings("unchecked")
 public class ACIPluginPublisher extends Recorder implements SimpleBuildStep {
