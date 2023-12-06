@@ -24,7 +24,7 @@
 
 package hudson.plugins.summary_report;
 
-
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import hudson.plugins.summary_report.report.Accordion;
 import hudson.plugins.summary_report.report.Field;
 import hudson.plugins.summary_report.report.Section;
@@ -33,7 +33,6 @@ import hudson.plugins.summary_report.report.Table;
 import hudson.plugins.summary_report.report.Tabs;
 import hudson.plugins.summary_report.report.Td;
 import hudson.plugins.summary_report.report.Tr;
-
 import java.io.File;
 import java.io.IOException;
 import javax.xml.parsers.ParserConfigurationException;
@@ -56,6 +55,7 @@ public class ParserXml {
      * @param xmlFile
      * 		Access path to the xml file
      */
+    @SuppressFBWarnings(value = "ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD", justification = "need to be fixed")
     public ParserXml(final String xmlFile) {
         xmlPath = xmlFile;
     }
@@ -78,7 +78,6 @@ public class ParserXml {
         }
         return "";
     }
-
 
     /**
      * Return result of the section.
@@ -105,6 +104,7 @@ public class ParserXml {
          * FLAGS
          */
         private boolean fSection = false;
+
         private boolean fTabs = false;
         private boolean fTab = false;
         private boolean fField = false;
@@ -112,7 +112,6 @@ public class ParserXml {
         private boolean fTr = false;
         private boolean fTd = false;
         private boolean fAccordion = false;
-
 
         /**
          * Main entry point.
@@ -123,8 +122,7 @@ public class ParserXml {
         }
 
         @Override
-        public void characters(final char[] ch, final int start,
-                final int length) throws SAXException {
+        public void characters(final char[] ch, final int start, final int length) throws SAXException {
 
             final String lecture = new String(ch, start, length);
 
@@ -137,16 +135,16 @@ public class ParserXml {
                     tmpTd.setCdata(lecture);
                 }
             }
-       }
+        }
 
         @Override
+        @SuppressFBWarnings(value = "ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD", justification = "need to be fixed")
         public void endDocument() throws SAXException {
             resultat = section;
         }
 
         @Override
-        public void endElement(final String uri, final String localName,
-                final String qName) throws SAXException {
+        public void endElement(final String uri, final String localName, final String qName) throws SAXException {
 
             if (qName.equals("section") && fSection) {
                 fSection = false;
@@ -159,10 +157,10 @@ public class ParserXml {
             } else if (qName.equals("table") && fAccordion && fTable) {
                 fTable = false;
                 tmpAccordion.addObject(tmpTable);
-            } else if (qName.equals("tabs")  && fTabs) {
+            } else if (qName.equals("tabs") && fTabs) {
                 fTabs = false;
                 section.addObject(tmpTabs);
-            } else if (qName.equals("tab")  && fTabs && fTab) {
+            } else if (qName.equals("tab") && fTabs && fTab) {
                 fTab = false;
                 tmpTabs.addTab(tmpTab);
             } else if (qName.equals("field") && fTabs && fTab && fField) {
@@ -171,10 +169,10 @@ public class ParserXml {
             } else if (qName.equals("table") && fTabs && fTab && fTable) {
                 fTable = false;
                 tmpTab.addObject(tmpTable);
-            } else if (qName.equals("field")  && fField) {
+            } else if (qName.equals("field") && fField) {
                 fField = false;
                 section.addObject(tmpField);
-            } else if (qName.equals("table")  && fTable) {
+            } else if (qName.equals("table") && fTable) {
                 fTable = false;
                 section.addObject(tmpTable);
             } else if (qName.equals("tr") && fTr) {
@@ -187,9 +185,9 @@ public class ParserXml {
         }
 
         @Override
-        public void startElement(final String uri, final String localName,
-        		final String qName, final Attributes attributes)
-        				throws SAXException {
+        public void startElement(
+                final String uri, final String localName, final String qName, final Attributes attributes)
+                throws SAXException {
             if (qName.equals("section")) {
                 fSection = true;
                 section.setSectionName(attributes.getValue("name"));

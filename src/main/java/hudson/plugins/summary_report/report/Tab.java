@@ -30,79 +30,76 @@ import java.util.ArrayList;
  */
 public class Tab {
 
-	private String status;
-	private String tabName;
-	private ArrayList<Object> objectList;
+    private String status;
+    private String tabName;
+    private ArrayList<Object> objectList;
 
-	/**
-	 * Constructor of a tab.
-	 */
-	public Tab() {
-		objectList = new ArrayList<Object>();
-		status = "tab";
-	}
+    /**
+     * Constructor of a tab.
+     */
+    public Tab() {
+        objectList = new ArrayList<Object>();
+        status = "tab";
+    }
 
-	/**
-	 * Get the status of a tab.
-	 * @return status
-	 * 		the status
-	 */
-	public String getStatus() {
-		return status;
-	}
+    /**
+     * Get the status of a tab.
+     * @return status
+     * 		the status
+     */
+    public String getStatus() {
+        return status;
+    }
 
-	/**
-	 * Set the status of a tab.
-	 * @param status
-	 *            the status to set
-	 */
-	public void setStatus(final String status) {
-		this.status = status;
+    /**
+     * Set the status of a tab.
+     * @param status
+     *            the status to set
+     */
+    public void setStatus(final String status) {
+        this.status = status;
+    }
 
-	}
+    /**
+     * Get the name of the tab.
+     * @return the tabName
+     */
+    public String getTabName() {
+        return tabName;
+    }
 
-	/**
-	 * Get the name of the tab.
-	 * @return the tabName
-	 */
-	public String getTabName() {
-		return tabName;
-	}
+    /**
+     * Set the name of the tab.
+     * @param tabName
+     *            the tabName to set
+     */
+    public void setTabName(final String tabName) {
+        this.tabName = tabName;
+    }
 
-	/**
-	 * Set the name of the tab.
-	 * @param tabName
-	 *            the tabName to set
-	 */
-	public void setTabName(final String tabName) {
-		this.tabName = tabName;
+    /**
+     * Get the current object list.
+     * @return the objectList
+     */
+    public ArrayList<Object> getObjectList() {
+        return objectList;
+    }
 
-	}
+    /**
+     * Set the current object list value.
+     * @param objectList
+     *            the objectList to set
+     */
+    public void setObjectList(final ArrayList<Object> objectList) {
+        this.objectList = objectList;
+    }
 
-	/**
-	 * Get the current object list.
-	 * @return the objectList
-	 */
-	public ArrayList<Object> getObjectList() {
-		return objectList;
-	}
-
-	/**
-	 * Set the current object list value.
-	 * @param objectList
-	 *            the objectList to set
-	 */
-	public void setObjectList(final ArrayList<Object> objectList) {
-		this.objectList = objectList;
-	}
-
-	/**
-	 * Add an object to the current object list value.
-	 * @param obj
-	 *            the object to add
-	 */
-	public void addObject(final Object obj) {
-		this.objectList.add(obj);
-	}
-
+    /**
+     * Add an object to the current object list value.
+     * @param obj
+     *            the object to add
+     */
+    public void addObject(final Object obj) {
+        this.objectList.add(obj);
+    }
 }

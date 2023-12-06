@@ -1,8 +1,9 @@
 package hudson.plugins.summary_report.report;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -10,8 +11,7 @@ import static org.junit.Assert.*;
  */
 public class TableTest {
 
-    public TableTest() {
-    }
+    public TableTest() {}
 
     /**
      * Test of Status methods, of class Table.
@@ -72,7 +72,6 @@ public class TableTest {
         /**************/
         /** Phase 2  **/
         /**************/
-
         tr.add(tr1);
         tr.add(tr2);
 

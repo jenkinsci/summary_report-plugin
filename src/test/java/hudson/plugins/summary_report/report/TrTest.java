@@ -1,8 +1,9 @@
 package hudson.plugins.summary_report.report;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -10,22 +11,21 @@ import static org.junit.Assert.*;
  */
 public class TrTest {
 
-    public TrTest() {
-    }
+    public TrTest() {}
 
     /**
      * Test of TdList methods, of class Tr.
      */
     @Test
     public void testTdList() {
-        
+
         Tr instance = new Tr();
 
         ArrayList<Td> tdList = new ArrayList<Td>();
-        
+
         Td td1 = new Td();
         Td td2 = new Td();
-        
+
         assertNotSame(td1, td2);
 
         /**************/
@@ -37,7 +37,6 @@ public class TrTest {
         /**************/
         /** Phase 2  **/
         /**************/
-
         tdList.add(td1);
         tdList.add(td2);
 
@@ -56,5 +55,4 @@ public class TrTest {
 
         assertEquals(tdList, instance.getTdList());
     }
-   
 }

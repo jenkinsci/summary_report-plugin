@@ -1,8 +1,9 @@
 package hudson.plugins.summary_report.report;
 
+import static org.junit.Assert.*;
+
 import java.util.ArrayList;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 /**
  *
@@ -10,8 +11,7 @@ import static org.junit.Assert.*;
  */
 public class AccordionTest {
 
-    public AccordionTest() {
-    }
+    public AccordionTest() {}
 
     /**
      * Test of Status methods, of class Accordion.
@@ -53,7 +53,7 @@ public class AccordionTest {
      */
     @Test
     public void testObjectList() {
-        
+
         Object obj1 = new Integer(1);
         Object obj2 = new Integer(2);
 
@@ -69,7 +69,7 @@ public class AccordionTest {
         // the objectList is empty
         assertEquals(objectList, instance.getObjectList());
 
-         /**************/
+        /**************/
         /** Phase 2  **/
         /**************/
         objectList.add(obj1);
@@ -79,7 +79,7 @@ public class AccordionTest {
         // Test of setter
         assertEquals(objectList, instance.getObjectList());
 
-         /**************/
+        /**************/
         /** Phase 3  **/
         /**************/
         // Creation of empty objectList
@@ -93,5 +93,4 @@ public class AccordionTest {
         // Test of add
         assertEquals(objectList2, instance2.getObjectList());
     }
-
 }

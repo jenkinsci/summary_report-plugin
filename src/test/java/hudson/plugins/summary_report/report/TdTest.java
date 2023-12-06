@@ -1,7 +1,8 @@
 package hudson.plugins.summary_report.report;
 
-import org.junit.Test;
 import static org.junit.Assert.*;
+
+import org.junit.Test;
 
 /**
  *
@@ -9,8 +10,7 @@ import static org.junit.Assert.*;
  */
 public class TdTest {
 
-    public TdTest() {
-    }
+    public TdTest() {}
 
     /**
      * Test of TdValue methods, of class Td.
@@ -97,7 +97,6 @@ public class TdTest {
         assertEquals(expResult, instance.getHref());
     }
 
-
     /**
      * Test of Width methods, of class Td.
      */
@@ -134,7 +133,7 @@ public class TdTest {
         assertEquals(expResult, instance.getAlign());
     }
 
-   /**
+    /**
      * Test of Cdata methods, of class Td.
      */
     @Test

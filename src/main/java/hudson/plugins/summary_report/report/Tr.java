@@ -29,38 +29,38 @@ import java.util.ArrayList;
  * Class responsible for a table row creation.
  */
 public class Tr {
-	private ArrayList<Td> tdList;
+    private ArrayList<Td> tdList;
 
-	/**
-	 * Constructor.
-	 */
-	public Tr() {
-		tdList = new ArrayList<Td>();
-	}
+    /**
+     * Constructor.
+     */
+    public Tr() {
+        tdList = new ArrayList<Td>();
+    }
 
-	/**
-	 * Get the column list.
-	 * @return the tdList
-	 */
-	public ArrayList<Td> getTdList() {
-		return tdList;
-	}
+    /**
+     * Get the column list.
+     * @return the tdList
+     */
+    public ArrayList<Td> getTdList() {
+        return tdList;
+    }
 
-	/**
-	 * Set the column list.
-	 * @param tdList
-	 *            the tdList to set
-	 */
-	public void setTdList(final ArrayList<Td> tdList) {
-		this.tdList = tdList;
-	}
+    /**
+     * Set the column list.
+     * @param tdList
+     *            the tdList to set
+     */
+    public void setTdList(final ArrayList<Td> tdList) {
+        this.tdList = tdList;
+    }
 
-	/**
-	 * Add a column to the current row.
-	 * @param td
-	 * 		The column to add
-	 */
-	public void addTd(final Td td) {
-		this.tdList.add(td);
-	}
+    /**
+     * Add a column to the current row.
+     * @param td
+     * 		The column to add
+     */
+    public void addTd(final Td td) {
+        this.tdList.add(td);
+    }
 }

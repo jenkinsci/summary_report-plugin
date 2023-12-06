@@ -30,58 +30,57 @@ import java.util.ArrayList;
  */
 public class Tabs {
 
-	private String status;
-	private ArrayList<Tab> tabList;
+    private String status;
+    private ArrayList<Tab> tabList;
 
-	/**
-	 * Constructor.
-	 */
-	public Tabs() {
-		tabList = new ArrayList<Tab>();
-		status = "tabs";
-	}
+    /**
+     * Constructor.
+     */
+    public Tabs() {
+        tabList = new ArrayList<Tab>();
+        status = "tabs";
+    }
 
-	/**
-	 * Get the status.
-	 * @return the status
-	 */
-	public String getStatus() {
-		return status;
-	}
+    /**
+     * Get the status.
+     * @return the status
+     */
+    public String getStatus() {
+        return status;
+    }
 
-	/**
-	 * Set the status.
-	 * @param status
-	 *		the status to set
-	 */
-	public void setStatus(final String status) {
-		this.status = status;
-	}
+    /**
+     * Set the status.
+     * @param status
+     *		the status to set
+     */
+    public void setStatus(final String status) {
+        this.status = status;
+    }
 
-	/**
-	 * Get the current tab list.
-	 * @return the tabList
-	 */
-	public ArrayList<Tab> getTabList() {
-		return tabList;
-	}
+    /**
+     * Get the current tab list.
+     * @return the tabList
+     */
+    public ArrayList<Tab> getTabList() {
+        return tabList;
+    }
 
-	/**
-	 * Set the current tab list.
-	 * @param tabList
-	 *            the tabList to set
-	 */
-	public void setTabList(final ArrayList<Tab> tabList) {
-		this.tabList = tabList;
-	}
+    /**
+     * Set the current tab list.
+     * @param tabList
+     *            the tabList to set
+     */
+    public void setTabList(final ArrayList<Tab> tabList) {
+        this.tabList = tabList;
+    }
 
-	/**
-	 * Add a tab to the current tab list.
-	 * @param obj
-	 *		The tab to add
-	 */
-	public void addTab(final Tab obj) {
-		this.tabList.add(obj);
-	}
-
+    /**
+     * Add a tab to the current tab list.
+     * @param obj
+     *		The tab to add
+     */
+    public void addTab(final Tab obj) {
+        this.tabList.add(obj);
+    }
 }

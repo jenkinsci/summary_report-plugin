@@ -23,6 +23,7 @@
  */
 package hudson.plugins.summary_report;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import hudson.Extension;
 import hudson.model.AbstractProject;
 import hudson.tasks.BuildStepDescriptor;
@@ -32,31 +33,31 @@ import hudson.tasks.Publisher;
  * Plugin connection to jenkins.
  */
 @Extension
+@SuppressFBWarnings(value = "MC_OVERRIDABLE_METHOD_CALL_IN_CONSTRUCTOR", justification = "need to be fixed")
 public class ACIPluginDescriptor extends BuildStepDescriptor<Publisher> {
 
-	/**
-	 * Get plugin description.
-	 */
-	public ACIPluginDescriptor() {
-		super(ACIPluginPublisher.class);
-		load();
-	}
+    /**
+     * Get plugin description.
+     */
+    public ACIPluginDescriptor() {
+        super(ACIPluginPublisher.class);
+        load();
+    }
 
-	/**
-	 * Get plugin availability.
-	 * @param jobType
-	 * 		Type of Job to we want this plugin to apply
-	 */
-	public boolean isApplicable(
-			final Class<? extends AbstractProject> jobType) {
-		return true;
-	}
+    /**
+     * Get plugin availability.
+     * @param jobType
+     * 		Type of Job to we want this plugin to apply
+     */
+    public boolean isApplicable(final Class<? extends AbstractProject> jobType) {
+        return true;
+    }
 
-	/**
-	 * Get Name of the plugin.
-	 */
-	@Override
-	public String getDisplayName() {
-		return "Publish XML Summary Reports";
-	}
+    /**
+     * Get Name of the plugin.
+     */
+    @Override
+    public String getDisplayName() {
+        return "Publish XML Summary Reports";
+    }
 }
