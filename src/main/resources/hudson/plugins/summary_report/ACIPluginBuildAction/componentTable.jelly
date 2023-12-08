@@ -31,6 +31,7 @@ THE SOFTWARE.
     xmlns:i="jelly:fmt"
     xmlns:local="local">
 
+
     <j:set var="sorttable" value=""/>
 
     <!-- if b.sorttable == yes -->
@@ -38,7 +39,24 @@ THE SOFTWARE.
         <j:set var="sorttable" value="summary_report_sortable"/>
     </j:if>
 
-    <table class="summary_report_table ${sorttable}">
+    <div class="table-responsive">
+    summary_report_table_${projectname}-${buildnumber}-${indexA}-${indexB}
+    <table
+      class="jenkins-table jenkins-!-margin-bottom-4 data-table"
+      id="summary_report_table_${indexA}-${indexB}"
+      data-remember-search-text="true"
+      isLoaded="true"
+      data-columns-definition="[null, null]"
+      data-table-configuration='
+      {
+        "responsive": {
+          "details": {
+            "type": "column"
+          }
+        },
+        "order": [ 0, "asc" ],
+        "stateSave": true
+      }'>
         <tbody>
             <j:forEach var="o" items="${b.trList}">
                 <tr>
@@ -64,5 +82,8 @@ THE SOFTWARE.
             </j:forEach>
         </tbody>
     </table>
+    </div>
+
+    <script type="text/javascript" src="${resURL}/plugin/data-tables-api/js/table.js"/>
 
 </j:jelly>

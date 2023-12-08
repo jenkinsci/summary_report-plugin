@@ -24,84 +24,41 @@ THE SOFTWARE.
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core"
     xmlns:l="/lib/layout"
-    xmlns:t="/lib/hudson"
-    xmlns:st="jelly:stapler">
+    xmlns:st="jelly:stapler"
+    xmlns:bs="/bootstrap5">
 
-    <!-- *************** -->
-    <!-- Import librairy -->
-    <!-- *************** -->
+    <st:adjunct includes="io.jenkins.plugins.bootstrap5"/>
 
+    <div class="fluid-container">
 
-    <!-- Css -->
-    <link type="text/css" href="${rootURL}/plugin/summary_report/lib/jquery/css/smoothness/jquery-ui-1.8.6.custom.css" rel="stylesheet" />
-
-    <link type="text/css" href="${rootURL}/plugin/summary_report/css/summary_report.css" rel="stylesheet" />
-
-    <!-- JQuery lib -->
-    <script type="text/javascript" src="${rootURL}/plugin/summary_report/lib/jquery/js/jquery-1.4.2.min.js"></script>
-    <script type="text/javascript" src="${rootURL}/plugin/summary_report/js/summary_report.js"></script>
-    <script type="text/javascript" src="${rootURL}/plugin/summary_report/lib/jquery/js/jquery-ui-1.8.6.custom.min.js"></script>
+        <j:set var="projectname" value="${from.getProjectName()}"/>
+        <j:set var="buildnumber" value="${from.getBuildNumber()}"/>
 
 
-    <!-- Cookies lib -->
-    <script type="text/javascript" src="${rootURL}/plugin/summary_report/lib/jquery.cookie.js"></script>
-    <script type="text/javascript" src="${rootURL}/plugin/summary_report/lib/jquery.tablesorter.min.js"></script>
-    <script type="text/javascript" src="${rootURL}/plugin/summary_report/lib/douglascrockford-JSON-js/json2.js"></script>
+        <!-- For each file .xml-->
+        <j:forEach var="a" items="${it.report.section}" indexVar="indexA">
+${it.class.name};
+${it.report.class.name};
+<!--${a.objectList.class.name};-->
 
-
-    <!-- *************** -->
-    <!--     Main        -->
-    <!-- *************** -->
-
-    <tr>
-        <td colspan="3">
-            <div class="summary_report_build">
-                <j:set var="projectname" value="${from.getProjectName()}"/>
-                <j:set var="buildnumber" value="${from.getBuildNumber()}"/>
-
-
-                <!-- For each file .xml-->
-                <j:forEach var="a" items="${it.report.section}" indexVar="indexA">
-
-                    <h2 style="color:${a.fontColor};">${a.sectionName}</h2>
-
+            <div class="row py-3">
+                <bs:card title="${a.sectionName}" fontAwesomeIcon="sun">
                     <!-- For each object in the section -->
                     <j:forEach var="b" items="${a.objectList}" indexVar="indexB">
-
-                        <!-- If the object is a table -->
-                        <j:if test="${b.status == 'table'}">
-                            <st:include page="/hudson/plugins/summary_report/ACIPluginBuildAction/componentTable.jelly" />
-                        </j:if>
-
-                        <!-- If the object is a field -->
-                        <j:if test="${b.status == 'field'}">
-                            <st:include page="/hudson/plugins/summary_report/ACIPluginBuildAction/componentField.jelly" />
-                        </j:if>
-
-
-                        <!-- If the object is an accordion -->
-                        <j:if test="${b.status == 'accordion'}">
-                            <st:include page="/hudson/plugins/summary_report/ACIPluginBuildAction/componentAccordion.jelly" />
-                        </j:if>
-
-                        <!-- If the object is a tab -->
-                        <j:if test="${b.status == 'tabs'}">
-                            <st:include page="/hudson/plugins/summary_report/ACIPluginBuildAction/componentTabs.jelly" />
-                        </j:if>
-
+b ${b.class.name};
+                       <st:include page="index.jelly" it="${b}" />
                     </j:forEach>
-
-                </j:forEach>
-
-                <!-- For each fileError-->
-                <j:if test="${from != null}">
-                    <j:forEach var="c" items="${from.getFileError()}" indexVar="indexC">
-                        <h2 style="color:${c[0]};">${c[1]}: <a style="color:${c[2]};" href="${c[4]}">${c[5]}</a>
-                        </h2>
-                    </j:forEach>
-                </j:if>
+                </bs:card>
             </div>
-        </td>
-    </tr>
 
+        </j:forEach>
+
+        <!-- For each fileError-->
+        <j:if test="${from != null}">
+            <j:forEach var="c" items="${from.getFileError()}" indexVar="indexC">
+                <h2 style="color:${c[0]};">${c[1]}: <a style="color:${c[2]};" href="${c[4]}">${c[5]}</a>
+                </h2>
+            </j:forEach>
+        </j:if>
+    </div>
 </j:jelly>

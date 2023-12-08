@@ -29,7 +29,9 @@ THE SOFTWARE.
         xmlns:f="/lib/form"
         xmlns:st="jelly:stapler">
 
-        <l:layout xmlns:plugin="/hudson/plugins/javancss/tags" css="/plugin/javancss/css/style.css">
+<!--        <l:layout xmlns:plugin="/hudson/plugins/javancss/tags" css="/plugin/javancss/css/style.css"> -->
+
+        <l:layout title="${it.displayName}" type="one-column">
                 <st:include it="${it.project}" page="sidepanel.jelly"/>
                 <l:main-panel>
 
