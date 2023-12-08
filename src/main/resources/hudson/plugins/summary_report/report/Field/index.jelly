@@ -22,41 +22,23 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -->
 <?jelly escape-by-default='true'?>
-<j:jelly
-  xmlns:j="jelly:core"
-  xmlns:l="/lib/layout"
-  xmlns:f="/lib/form"
-  xmlns:i="jelly:fmt"
-  xmlns:st="jelly:stapler"
-  xmlns:t="/lib/hudson"
->
-<div class="fluid-container">
-  <div class="row py-3">
-  <f:entry title="${it.fieldName}" field="${it.fieldName.replace(' ', '')}" enable="false">
-  <f:textbox value="${it.fieldValue}"/>
-</f:entry>
-
-  </div>
-</div>
-    <div class="summary_report_field" style="color:${it.titleColor};">
-        <span>${it.fieldName}</span>
-        <span style="color:${it.detailColor};">
-            <j:if test="${(it.href != null) &amp;&amp; (it.href.length() > 6) &amp;&amp; (it.href.substring(0,7) == 'http://')}">
-                <a href="${it.href}">${it.fieldValue}</a>
+<j:jelly xmlns:j="jelly:core">
+    <div class="col">
+        <j:set var="fieldId" value="${it.id}"/>
+        <div class="mb-3">
+            <label class="form-label" for="${fieldId}">${it.fieldName}</label>
+            <input
+              class="form-control"
+              type="text"
+              name="chartType-commit-statistics"
+              id="${fieldId}" value="${it.fieldValue}"
+              readonly="true"/>
+            <j:if test="${it.cdata != null}">
+                <pre style="color:${it.fontColor}; font-weight:${it.fontAttribute};" class="jenkins-!-padding-2 jenkins-!-margin-top-1 overflow-auto">
+                    <j:out value="${app.markupFormatter.translate(it.cdata)}"/>
+                </pre>
             </j:if>
-
-            <j:if test="${(it.href != null) &amp;&amp; (it.href.length() > 7) &amp;&amp; (it.href.substring(0,8) == 'https://')}">
-                <a href="${it.href}">${it.fieldValue}</a>
-            </j:if>
-
-            <j:if test="${it.href == null}">
-                ${it.fieldValue}
-            </j:if>
-
-            <j:if test="${(it.href != null) &amp;&amp; (it.href.length() > 6) &amp;&amp; (it.href.substring(0,7) != 'http://') &amp;&amp; (it.href.length() > 7) &amp;&amp; (it.href.substring(0,8) != 'https://')}">
-                <a href="${buildn}${it.href}">${it.fieldValue}</a>
-            </j:if>
-        </span>
+        </div>
     </div>
 
 </j:jelly>

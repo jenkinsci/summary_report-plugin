@@ -30,7 +30,8 @@ import java.util.ArrayList;
  */
 public class Table {
 
-    private String status;
+    private static long counter;
+    private String id = null;
     private ArrayList<Tr> trList;
     private String sorttable;
 
@@ -39,24 +40,19 @@ public class Table {
      */
     public Table() {
         trList = new ArrayList<Tr>();
-        status = "table";
+        this.makeId();
     }
 
-    /**
-     * Get the status.
-     * @return the status
-     */
-    public String getStatus() {
-        return status;
+    private synchronized void makeId() {
+        counter++;
+        this.id = getClass().getName().replace(".", "-") + "-" + counter;
     }
 
-    /**
-     * Set the status.
-     * @param status
-     *		the status to set
-     */
-    public void setStatus(final String status) {
-        this.status = status;
+    public String getId() {
+        if (this.id == null) {
+            makeId();
+        }
+        return this.id;
     }
 
     /**

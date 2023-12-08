@@ -22,18 +22,40 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -->
 <?jelly escape-by-default='true'?>
-<j:jelly
-  xmlns:j="jelly:core"
-  xmlns:l="/lib/layout"
-  xmlns:f="/lib/form"
-  xmlns:i="jelly:fmt"
-  xmlns:st="jelly:stapler"
-  xmlns:t="/lib/hudson"
->
+<j:jelly xmlns:j="jelly:core"
+  xmlns:st="jelly:stapler">
 
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <j:forEach var="tab" items="${it.tabList}" indexVar="tabIndex">
+      <j:set var="tabId" value="${it.id}"/>
+      <j:set var="extraClass" value=""/>
+      <j:if test="${tabIndex == 0}">
+        <j:set var="extraClass" value="active"/>
+      </j:if>
 
-    
+      <li class="nav-item" role="presentation">
+        <button class="nav-link ${extraClass}" id="${tabId}-tab" data-bs-toggle="tab" data-bs-target="#${tabId}" type="button" role="tab" aria-controls="${tabId}" aria-selected="true">${tab.tabName}</button>
+      </li>
+    </j:forEach>
+  </ul>
 
-    <script type="text/javascript" src="${resURL}/plugin/data-tables-api/js/table.js"/>
+  <!-- Tab panes -->
 
+  <j:forEach var="tab" items="${it.tabList}" indexVar="tabIndex">
+    <j:set var="tabId" value="tabs-${indexSection}-${indexObject}-${tabIndex}"/>
+    <j:set var="extraClass" value=""/>
+    <j:if test="${tabIndex == 0}">
+      <j:set var="extraClass" value="active"/>
+    </j:if>
+    <div class="tab-content">
+      <div class="tab-pane jenkins-!-margin-top-1 ${extraClass}" id="${tabId}" role="tabpanel" aria-labelledby="${tabId}-tab">
+        <div class="row py-3"> 
+          <j:forEach var="object" items="${tab.objectList}">
+            <st:include page="index.jelly" it="${object}" />
+          </j:forEach>
+        </div>
+      </div>
+    </div>
+  </j:forEach>
 </j:jelly>

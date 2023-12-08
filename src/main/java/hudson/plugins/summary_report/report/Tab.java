@@ -30,7 +30,8 @@ import java.util.ArrayList;
  */
 public class Tab {
 
-    private String status;
+    private static long counter;
+    private String id = null;
     private String tabName;
     private ArrayList<Object> objectList;
 
@@ -39,25 +40,19 @@ public class Tab {
      */
     public Tab() {
         objectList = new ArrayList<Object>();
-        status = "tab";
+        this.makeId();
     }
 
-    /**
-     * Get the status of a tab.
-     * @return status
-     * 		the status
-     */
-    public String getStatus() {
-        return status;
+    private synchronized void makeId() {
+        counter++;
+        this.id = getClass().getName().replace(".", "-") + "-" + counter;
     }
 
-    /**
-     * Set the status of a tab.
-     * @param status
-     *            the status to set
-     */
-    public void setStatus(final String status) {
-        this.status = status;
+    public String getId() {
+        if (this.id == null) {
+            makeId();
+        }
+        return this.id;
     }
 
     /**

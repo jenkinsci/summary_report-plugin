@@ -22,18 +22,27 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -->
 <?jelly escape-by-default='true'?>
-<j:jelly
-  xmlns:j="jelly:core"
-  xmlns:l="/lib/layout"
-  xmlns:f="/lib/form"
-  xmlns:i="jelly:fmt"
-  xmlns:st="jelly:stapler"
-  xmlns:t="/lib/hudson"
->
+<j:jelly xmlns:j="jelly:core"
+  xmlns:st="jelly:stapler">
 
+  <j:set var="accordionId" value="${it.id}"/>
 
-    
+  <div class="accordion" id="${accordionId}">
+    <div class="accordion-item">
+      <h2 class="accordion-header" id="${accordionId}-heading">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#${accordionId}-collapse" aria-expanded="false" aria-controls="${accordionId}-collapse">
+        ${it.accordionName}
+        </button>
+      </h2>
+      <div id="${accordionId}-collapse" class="accordion-collapse collapse" aria-labelledby="${accordionId}-heading" data-bs-parent="#${accordionId}">
+        <div class="accordion-body">
 
-    <script type="text/javascript" src="${resURL}/plugin/data-tables-api/js/table.js"/>
+          <j:forEach var="object" items="${it.objectList}">
+            <st:include page="index.jelly" it="${object}" />
+          </j:forEach>
+        </div>
+      </div>
+    </div>
+  </div>
 
 </j:jelly>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section name="Performance Summary" line="0" column="0">
+	<field name="Field Name To Display" titlecolor="black" value="My Field Value" detailcolor="#000000" href="artifacts/field.txt">
+		<![CDATA[
+		....TEXT....
+		<a href="http://....">Link to something</a>
+		<a href="https://github.com/jenkinsci/summary_report-plugin">Link to something</a>
+		...Some more text...
+	 ]]>
+	</field>
+
+	<field name="Build status" value="All target succeeded" />
+	<field name="Functionnal status" value="Validation is Ok 1" />
+	<field name="Functionnal status" value="Validation is Ok2" />
+	<field name="Functionnal status" value="Validation is Ok3" />
+	<field name="Functionnal status" value="Validation is Ok4" />
+	<field name="Functionnal status" value="Validation is Ok5" />
+	<table sorttable="yes">
+		<tr>
+			<td value="Col1"/>
+			<td value="Col2"/>
+			<td value="Col2"/>
+			<td value="Col2"/>
+			<td value="Col2"/>
+			<td value="Col2"/>
+			<td value="Col2"/>
+			<td value="Col2"/>
+		</tr>
+		<tr>
+			<td value="Line 1" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="left" width="200"/>
+			<td value="1" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="none" width="200"/>
+			<td value="1" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="none" width="200"/>
+			<td value="1" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="none" width="200"/>
+			<td value="1" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="none" width="200"/>
+			<td value="1" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="none" width="200"/>
+			<td value="1" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="none" width="200"/>
+			<td value="1" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="none" width="200"/>
+		</tr>
+		<tr>
+			<td value="Line 2" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="left" width="200"/>
+			<td value="0" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="none" width="200"/>
+			<td value="0" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="none" width="200"/>
+			<td value="0" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="none" width="200"/>
+			<td value="0" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="none" width="200"/>
+			<td value="0" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="none" width="200"/>
+			<td value="0" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="none" width="200"/>
+			<td value="0" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="none" width="200"/>
+		</tr>
+	</table>
+	<tabs>
+		<tab name="Tab with fields">
+			<field name="Build status" value="All target succeeded" />
+			<field name="Build status" value="All target succeeded" />
+			<field name="Build status" value="All target succeeded" />
+			<field name="Functionnal status" value="Validation is Ok" />
+			<field name="Functionnal status" value="Validation is Ok" />
+			<field name="Functionnal status" value="Validation is Ok" />
+			<field name="Functionnal status" value="Validation is Ok" />
+			<field name="Functionnal status" value="Validation is Ok" />
+		</tab>
+		<tab name="Tab with table">
+			<table>
+				<tr>
+					<td value="Table title" bgcolor="red" fontcolor="black" title="Title1" fontattribute="bold" href="report.xls" align="center" width="200"/>
+					<td value="Column 1" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="center" width="200"/>
+				</tr>
+				<tr>
+					<td value="Line 1" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="left" width="200"/>
+					<td value="Value 1" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="none" width="200"/>
+				</tr>
+			</table>
+		</tab>
+
+		<tab name="Tab with accordion">
+			<accordion name="O3MultCAS12">
+				<field name="Option" value="Value of options" />
+				<field name="Tests" value="Value of tests" />
+				<field name="Tests" value="Value of tests" />
+				<field name="Tests" value="Value of tests" />
+			</accordion>
+		</tab>
+
+		<tab name="Empty tab">
+		</tab>
+
+
+		<tab name="Tab with tabs">
+			<tabs>
+
+				<tab name="Tab with accordion">
+					<accordion name="O3MultCAS11">
+						<field name="Option" value="Value of options" />
+						<field name="Tests" value="Value of tests" />
+						<field name="Tests" value="Value of tests" />
+						<field name="Tests" value="Value of tests" />
+					</accordion>
+				</tab>
+
+				<tab name="Empty tab">
+				</tab>
+			</tabs>
+		</tab>
+
+	</tabs>
+
+	<accordion name="O3MultCAS">
+		<field name="Option" value="Value of options" />
+		<field name="Tests" value="Value of tests" />
+		<field name="Tests" value="Value of tests" />
+		<field name="Tests" value="Value of tests" />
+	</accordion>
+	<accordion name="O3MultCAS2">
+			<tabs>
+
+				<tab name="Tab with accordion">
+					<accordion name="O3MultCAS3">
+						<field name="Option" value="Value of options" />
+						<field name="Tests" value="Value of tests" />
+						<field name="Tests" value="Value of tests" />
+						<field name="Tests" value="Value of tests" />
+					</accordion>
+				</tab>
+
+				<tab name="Empty tab">
+				</tab>
+			</tabs>
+	</accordion>
+
+</section>

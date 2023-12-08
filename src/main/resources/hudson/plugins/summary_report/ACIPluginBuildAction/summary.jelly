@@ -26,31 +26,18 @@ THE SOFTWARE.
     xmlns:l="/lib/layout"
     xmlns:st="jelly:stapler"
     xmlns:bs="/bootstrap5">
-
-    <st:adjunct includes="io.jenkins.plugins.bootstrap5"/>
-
+    <st:adjunct includes="io.jenkins.plugins.bootstrap5"/> 
     <div class="fluid-container">
-
-        <j:set var="projectname" value="${from.getProjectName()}"/>
-        <j:set var="buildnumber" value="${from.getBuildNumber()}"/>
-
-
         <!-- For each file .xml-->
-        <j:forEach var="a" items="${it.report.section}" indexVar="indexA">
-${it.class.name};
-${it.report.class.name};
-<!--${a.objectList.class.name};-->
-
-            <div class="row py-3">
-                <bs:card title="${a.sectionName}" fontAwesomeIcon="sun">
-                    <!-- For each object in the section -->
-                    <j:forEach var="b" items="${a.objectList}" indexVar="indexB">
-b ${b.class.name};
-                       <st:include page="index.jelly" it="${b}" />
-                    </j:forEach>
-                </bs:card>
-            </div>
-
+        <j:forEach var="section" items="${it.report.section}" indexVar="indexSection">
+            <bs:card title="${section.sectionName}" fontAwesomeIcon="sun">
+                <!-- For each object in the section -->
+                <j:forEach var="object" items="${section.objectList}" indexVar="indexObject">
+                    <div class="row py-3">
+                        <st:include page="index.jelly" it="${object}" />
+                    </div>
+                </j:forEach>
+            </bs:card>
         </j:forEach>
 
         <!-- For each fileError-->

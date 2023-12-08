@@ -23,10 +23,55 @@ THE SOFTWARE.
 -->
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core"
-    xmlns:st="jelly:stapler"
-    xmlns:dt="/data-tables">
+    xmlns:st="jelly:stapler">
+  
+    <j:set var="tableId" value="${it.id}"/>
+   
+    <st:adjunct includes="io.jenkins.plugins.data-tables"/>
+    <div class="table-responsive">
+        <table class="table table-hover table-striped display jenkins-!-margin-bottom-0" id="${tableId}">
+            <thead>
+                <tr>
+                    <j:forEach var="head" items="${it.trList[0].tdList}">
+                        <th>${head.tdValue} </th>
+                    </j:forEach>
+                </tr>
+            </thead>
+            <tbody>
+                <j:forEach var="tr" items="${it.trList}">
+                    <tr>
+                        <j:forEach var="td" items="${tr.tdList}">
+                            <td style="width:${td.width}; background-color:${td.bgColor};" tooltip="${td.title}" align="${td.align}">
 
-${it.class.name}
-<dt:table model="${it.getTableModel('forensics')}"/>
+                                <j:if test="${td.tdValue != null}">
+                                    <j:set var="tdValue" value="${td.tdValue}"/>
+                                    <j:choose>
+                                        <j:when test="${td.href != null and !td.href.isEmpty()}">
+                                            <a href="${td.href}" class="jenkins-table__link">${tdValue}</a>
+                                        </j:when>
+                                        <j:otherwise>${tdValue}</j:otherwise>
+                                    </j:choose>
+                                </j:if>
+                                <j:if test="${td.cdata != null}">
+                                    <pre style="color:${td.fontColor}; font-weight:${td.fontAttribute};">
+                                        <j:out value="${app.markupFormatter.translate(td.cdata)}"/>
+                                    </pre>
+                                </j:if>
+                            </td>
+                        </j:forEach>
+                    </tr>
+                </j:forEach>
+            </tbody>
+        </table>
+    </div>
+
+
+    <script type="text/javascript">
+      /* global jQuery3 */
+      jQuery3('#${tableId}').DataTable({
+        pagingType: 'numbers', // Page number button only
+        order: [[0, 'asc'], [1, 'asc']] // Sort by file name and line number
+      });
+    </script>
 
 </j:jelly>
