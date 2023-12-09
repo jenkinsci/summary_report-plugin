@@ -28,18 +28,21 @@ THE SOFTWARE.
     <j:set var="tableId" value="${it.id}"/>
    
     <st:adjunct includes="io.jenkins.plugins.data-tables"/>
+    <link rel="stylesheet" href="${resURL}/plugin/lockable-resources/css/style.css"/>
     <div class="table-responsive">
-        <table class="table table-hover table-striped display jenkins-!-margin-bottom-0" id="${tableId}">
+        <table class="jenkins-table jenkins-!-margin-bottom-4 data-table" id="${tableId}">
             <thead>
                 <tr>
+                    <th>Index</th>
                     <j:forEach var="head" items="${it.trList[0].tdList}">
-                        <th>${head.tdValue} </th>
+                        <th>${head.tdValue}</th>
                     </j:forEach>
                 </tr>
             </thead>
             <tbody>
-                <j:forEach var="tr" items="${it.trList}">
+                <j:forEach var="tr" items="${it.trList}" indexVar="trIndex">
                     <tr>
+                        <td>${trIndex + 1}</td>
                         <j:forEach var="td" items="${tr.tdList}">
                             <td style="width:${td.width}; background-color:${td.bgColor};" tooltip="${td.title}" align="${td.align}">
 
@@ -70,7 +73,7 @@ THE SOFTWARE.
       /* global jQuery3 */
       jQuery3('#${tableId}').DataTable({
         pagingType: 'numbers', // Page number button only
-        order: [[0, 'asc'], [1, 'asc']] // Sort by file name and line number
+        order: [[0, 'asc']] // Sort by file name and line number
       });
     </script>
 

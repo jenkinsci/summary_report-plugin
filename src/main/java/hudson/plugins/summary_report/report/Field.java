@@ -24,7 +24,7 @@
 package hudson.plugins.summary_report.report;
 
 /**
- * Class responsible for a accordion creation.
+ * Class responsible for a field creation.
  */
 public class Field {
 
