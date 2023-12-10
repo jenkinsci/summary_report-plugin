@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section name="Performance Summary" line="0" column="0">
+	<tabs>
+		<tab name="Tab 1">
+			<field name="Build status 1 1" value="All target succeeded" />
+			<field name="Build status 1 2" value="All target succeeded" />
+		</tab>
+		<tab name="Tab 2">
+			<field name="Build status 2 1" value="All target succeeded" />
+			<field name="Build status 2 2" value="All target succeeded" />
+		</tab>
+		<tab name="empty tab">
+		</tab>
+	</tabs>
+</section>

@@ -23,36 +23,35 @@
  */
 package hudson.plugins.summary_report.report;
 
-import java.util.ArrayList;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
 
 /**
  * Class responsible for a tab creation.
  */
-public class Tab {
+public class Tab extends Component {
 
-    private static long counter;
-    private String id = null;
     private String tabName;
-    private ArrayList<Object> objectList;
 
     /**
      * Constructor of a tab.
      */
     public Tab() {
-        objectList = new ArrayList<Object>();
-        this.makeId();
+        this.setType("tab");
+        this.initChildObjects();
     }
 
-    private synchronized void makeId() {
-        counter++;
-        this.id = getClass().getName().replace(".", "-") + "-" + counter;
+    @Override
+    public void init(final Attributes attributes) throws SAXException {
+
+        super.init(attributes);
+
+        this.setTabName(attributes.getValue("name"));
     }
 
-    public String getId() {
-        if (this.id == null) {
-            makeId();
-        }
-        return this.id;
+    @Override
+    public boolean isPrimitive() {
+        return false;
     }
 
     /**
@@ -70,31 +69,5 @@ public class Tab {
      */
     public void setTabName(final String tabName) {
         this.tabName = tabName;
-    }
-
-    /**
-     * Get the current object list.
-     * @return the objectList
-     */
-    public ArrayList<Object> getObjectList() {
-        return objectList;
-    }
-
-    /**
-     * Set the current object list value.
-     * @param objectList
-     *            the objectList to set
-     */
-    public void setObjectList(final ArrayList<Object> objectList) {
-        this.objectList = objectList;
-    }
-
-    /**
-     * Add an object to the current object list value.
-     * @param obj
-     *            the object to add
-     */
-    public void addObject(final Object obj) {
-        this.objectList.add(obj);
     }
 }

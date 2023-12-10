@@ -28,18 +28,12 @@ THE SOFTWARE.
     xmlns:bs="/bootstrap5">
     <st:adjunct includes="io.jenkins.plugins.bootstrap5"/>
     <tr>
+        <td/>
         <td colspan="3">
-            <div class="fluid-container">
+            <div class="container-fluid jenkins-!-padding-0">
                 <!-- For each file .xml-->
-                <j:forEach var="section" items="${it.report.section}" indexVar="indexSection">
-                    <bs:card title="${section.sectionName}" fontAwesomeIcon="sun">
-                        <!-- For each object in the section -->
-                        <j:forEach var="object" items="${section.objectList}" indexVar="indexObject">
-                            <div class="row py-3">
-                                <st:include page="index.jelly" it="${object}" />
-                            </div>
-                        </j:forEach>
-                    </bs:card>
+                <j:forEach var="component" items="${it.report.components}">
+                    <st:include page="index.jelly" it="${component}" />
                 </j:forEach>
 
                 <!-- For each fileError-->

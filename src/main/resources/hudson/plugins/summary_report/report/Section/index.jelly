@@ -1,0 +1,14 @@
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core"
+    xmlns:st="jelly:stapler"
+    xmlns:bs="/bootstrap5">
+        <bs:card title="${it.sectionName}" fontAwesomeIcon="sun" id="${it.id}" class="${it.padding} ${it.margin}">
+            <!-- For each object in the section -->
+            <j:forEach var="object" items="${it.objectList}" indexVar="indexObject">
+                <div class="row">
+                    <st:include page="index.jelly" it="${object}" />
+                </div>
+            </j:forEach>
+        </bs:card>
+
+</j:jelly>

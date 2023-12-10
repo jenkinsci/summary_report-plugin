@@ -24,34 +24,28 @@
 package hudson.plugins.summary_report.report;
 
 import java.util.ArrayList;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
 
 /**
  * Class responsible for a set of tab creation.
  */
-public class Tabs {
+public class Tabs extends Component {
 
-    private static long counter;
-    private String id = null;
     private ArrayList<Tab> tabList;
 
     /**
      * Constructor.
      */
     public Tabs() {
+        this.setType("tabs");
         tabList = new ArrayList<Tab>();
-        this.makeId();
     }
 
-    private synchronized void makeId() {
-        counter++;
-        this.id = getClass().getName().replace(".", "-") + "-" + counter;
-    }
+    @Override
+    public void init(final Attributes attributes) throws SAXException {
 
-    public String getId() {
-        if (this.id == null) {
-            makeId();
-        }
-        return this.id;
+        super.init(attributes);
     }
 
     /**
@@ -78,5 +72,15 @@ public class Tabs {
      */
     public void addTab(final Tab obj) {
         this.tabList.add(obj);
+    }
+
+    /**
+     * Add an object to the current object list.
+     * @param obj
+     *            the object to add
+     */
+    @Override
+    public void addObject(final Object obj) {
+        this.addTab((Tab) obj);
     }
 }

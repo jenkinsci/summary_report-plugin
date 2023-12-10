@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<section name="Performance Summary" line="0" column="0">
+    <layout-container>
+        <layout-row>
+            <layout-col grid-width="3">
+                <field name="col 1" value="size 3"/>
+            </layout-col>
+            <layout-col grid-width="3">
+                <field name="col 2" value="size 3"/>
+            </layout-col>
+            <layout-col grid-width="6">
+                <field name="col 3" value="size 6" />
+            </layout-col>
+        </layout-row>
+        <layout-row>
+            <layout-col grid-width="6">
+                <field name="col 1" value="size 6">
+                    <![CDATA[
+....TEXT....
+<a href="http://....">Link to something</a>
+<a href="https://github.com/jenkinsci/summary_report-plugin">Link to something</a>
+...Some more text...
+]]>
+                </field>
+            </layout-col>
+            <layout-col grid-width="6">
+                <field name="col 2" value="size 6" />
+            </layout-col>
+        </layout-row>
+        <layout-row padding="3">
+            <html trusted="true">
+                <![CDATA[
+<div class="row 3">
+    <div class="col-12">
+        <span class="badge bg-secondary d-xxxl-inline d-none">xxxl</span>
+        <span class="badge bg-secondary d-xxl-inline d-xxxl-none d-none">xxl</span>
+        <span class="badge bg-secondary d-xl-inline d-xxl-none d-none">xl</span>
+        <span class="badge bg-secondary d-lg-inline d-xl-none d-none">lg</span>
+        <span class="badge bg-secondary d-md-inline d-lg-none d-none">md</span>
+        <span class="badge bg-secondary d-sm-inline d-md-none d-none">sm</span>
+        <span class="badge bg-secondary d-inline d-sm-none">xs</span>
+    </div>
+</div>
+     ]]>
+            </html>
+        </layout-row>
+        <layout-row margin="3">
+            <html>
+                <![CDATA[
+<div class="row 3">
+    <div class="col-12">
+        This content is safully truncated by <strong>markup-formatter</strong>
+    </div>
+</div>
+     ]]>
+            </html>
+        </layout-row>
+        <layout-row padding="3">
+            <layout-col grid-width="6">
+                <!--    https://fontawesome.com/ -->
+                <bs-card title="Card with pure html" icon="beer-mug-empty">
+                    <html>
+                        <![CDATA[
+        ....TEXT....
+        <a href="http://....">Link to something</a>
+        <a href="https://github.com/jenkinsci/summary_report-plugin">Link to something</a>
+        ...Some more text...
+     ]]>
+                    </html>
+                </bs-card>
+            </layout-col>
+            <layout-col grid-width="6">
+                <bs-card title="Card with fields" icon="mug-hot">
+
+                    <layout-row padding="3">
+                        <layout-col grid-width="6">
+                            <field name="col 1" value="size 6" />
+                        </layout-col>
+                        <layout-col grid-width="6">
+                            <field name="col 2" value="size 6" />
+                        </layout-col>
+                    </layout-row>
+                </bs-card>
+            </layout-col>
+        </layout-row>
+    </layout-container>
+</section>

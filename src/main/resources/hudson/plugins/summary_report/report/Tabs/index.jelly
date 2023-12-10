@@ -26,36 +26,40 @@ THE SOFTWARE.
   xmlns:st="jelly:stapler">
 
   <!-- Nav tabs -->
-  <ul class="nav nav-tabs" role="tablist">
+  <ul class="nav nav-tabs ${it.padding} ${it.margin}" role="tablist" id="${it.id}">
     <j:forEach var="tab" items="${it.tabList}" indexVar="tabIndex">
-      <j:set var="tabId" value="${it.id}"/>
+      <j:set var="tabId" value="${tab.id}"/>
       <j:set var="extraClass" value=""/>
+      <j:set var="selected" value="false"/>
       <j:if test="${tabIndex == 0}">
         <j:set var="extraClass" value="active"/>
+        <j:set var="selected" value="true"/>
       </j:if>
 
       <li class="nav-item" role="presentation">
-        <button class="nav-link ${extraClass}" id="${tabId}-tab" data-bs-toggle="tab" data-bs-target="#${tabId}" type="button" role="tab" aria-controls="${tabId}" aria-selected="true">${tab.tabName}</button>
+        <button class="nav-link ${extraClass}" id="${tabId}-tab" data-bs-toggle="tab" data-bs-target="#${tabId}" type="button" role="tab" aria-controls="${tabId}" aria-selected="${selected}">${tab.tabName}</button>
       </li>
     </j:forEach>
   </ul>
 
   <!-- Tab panes -->
 
-  <j:forEach var="tab" items="${it.tabList}" indexVar="tabIndex">
-    <j:set var="tabId" value="tabs-${indexSection}-${indexObject}-${tabIndex}"/>
-    <j:set var="extraClass" value=""/>
-    <j:if test="${tabIndex == 0}">
-      <j:set var="extraClass" value="active"/>
-    </j:if>
-    <div class="tab-content">
-      <div class="tab-pane jenkins-!-margin-top-1 ${extraClass}" id="${tabId}" role="tabpanel" aria-labelledby="${tabId}-tab">
-        <div class="row py-3"> 
-          <j:forEach var="object" items="${tab.objectList}">
-            <st:include page="index.jelly" it="${object}" />
-          </j:forEach>
+  <div class="tab-content" id="${it.id}-content">
+    <j:forEach var="tab" items="${it.tabList}" indexVar="tabIndex">
+      <j:set var="tabId" value="${tab.id}"/>
+      <j:set var="extraClass" value=""/>
+      <j:if test="${tabIndex == 0}">
+        <j:set var="extraClass" value="show active"/>
+      </j:if>
+      <div class="tab-content">
+        <div class="tab-pane jenkins-!-margin-top-1 ${extraClass}" id="${tabId}" role="tabpanel" aria-labelledby="${tabId}-tab">
+          <div class="row py-3">
+            <j:forEach var="object" items="${tab.objectList}">
+              <st:include page="index.jelly" it="${object}" />
+            </j:forEach>
+          </div>
         </div>
       </div>
-    </div>
-  </j:forEach>
+    </j:forEach>
+  </div>
 </j:jelly>

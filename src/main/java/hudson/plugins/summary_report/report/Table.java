@@ -24,11 +24,13 @@
 package hudson.plugins.summary_report.report;
 
 import java.util.ArrayList;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
 
 /**
  * Class responsible for a table creation.
  */
-public class Table {
+public class Table extends Component {
 
     private static long counter;
     private String id = null;
@@ -39,20 +41,16 @@ public class Table {
      * Constructor.
      */
     public Table() {
-        trList = new ArrayList<Tr>();
-        this.makeId();
+        this.setType("table");
+        this.trList = new ArrayList<Tr>();
     }
 
-    private synchronized void makeId() {
-        counter++;
-        this.id = getClass().getName().replace(".", "-") + "-" + counter;
-    }
+    @Override
+    public void init(final Attributes attributes) throws SAXException {
 
-    public String getId() {
-        if (this.id == null) {
-            makeId();
-        }
-        return this.id;
+        super.init(attributes);
+
+        this.setSorttable(attributes.getValue("sorttable"));
     }
 
     /**
@@ -96,5 +94,20 @@ public class Table {
      */
     public void addTr(final Tr tr) {
         this.trList.add(tr);
+    }
+
+    /**
+     * Add an object to the current object list.
+     * @param obj
+     *            the object to add
+     */
+    @Override
+    public void addObject(final Object obj) {
+        this.addTr((Tr) obj);
+    }
+
+    @Override
+    public boolean isPrimitive() {
+        return false;
     }
 }

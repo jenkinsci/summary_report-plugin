@@ -23,16 +23,16 @@
  */
 package hudson.plugins.summary_report.report;
 
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+
 /**
  * Class responsible for a field creation.
  */
-public class Field {
+public class Field extends Component {
 
-    private static long counter;
-    private String id = null;
     private String fieldName;
     private String fieldValue;
-    private String cdata;
     private String href;
     private String titleColor;
     private String detailColor;
@@ -41,21 +41,20 @@ public class Field {
      * Constructor.
      */
     public Field() {
-        this.makeId();
+        this.setType("field");
     }
 
-    private synchronized void makeId() {
-        counter++;
-        this.id = getClass().getName().replace(".", "-") + "-" + counter;
-    }
+    @Override
+    public void init(final Attributes attributes) throws SAXException {
 
-    public String getId() {
-        if (this.id == null) {
-            makeId();
-        }
-        return this.id;
-    }
+        super.init(attributes);
 
+        this.setFieldName(attributes.getValue("name"));
+        this.setFieldValue(attributes.getValue("value"));
+        this.setHref(attributes.getValue("href"));
+        this.setTitleColor(attributes.getValue("titlecolor"));
+        this.setDetailColor(attributes.getValue("detailcolor"));
+    }
 
     /**
      * Get Field Name.
@@ -89,27 +88,6 @@ public class Field {
      */
     public void setFieldValue(final String fieldValue) {
         this.fieldValue = fieldValue;
-    }
-
-    /**
-     * Get cdata section of the field.
-     * @return The cdata section
-     */
-    public String getCdata() {
-        return cdata;
-    }
-
-    /**
-     * Set cdata section of the field.
-     * @param cdata
-     * 		The cdata section to set
-     */
-    public void setCdata(final String cdata) {
-        if (this.cdata == null) {
-            this.cdata = cdata;
-        } else {
-            this.cdata = this.cdata + cdata;
-        }
     }
 
     /**

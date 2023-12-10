@@ -23,36 +23,30 @@
  */
 package hudson.plugins.summary_report.report;
 
-import java.util.ArrayList;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
 
 /**
  * Class responsible for a accordion creation.
  */
-public class Accordion {
+public class Accordion extends Component {
 
-    private static long counter;
-    private String id = null;
     private String accordionName;
-    private ArrayList<Object> objectList;
 
     /**
      * Constructor.
      */
     public Accordion() {
-        objectList = new ArrayList<Object>();
-        this.makeId();
+        this.setType("accordion");
+        this.initChildObjects();
     }
 
-    private synchronized void makeId() {
-        counter++;
-        this.id = getClass().getName().replace(".", "-") + "-" + counter;
-    }
+    @Override
+    public void init(final Attributes attributes) throws SAXException {
 
-    public String getId() {
-        if (this.id == null) {
-            makeId();
-        }
-        return this.id;
+        super.init(attributes);
+
+        this.setAccordionName(attributes.getValue("name"));
     }
 
     /**
@@ -70,31 +64,5 @@ public class Accordion {
      */
     public void setAccordionName(final String accordionName) {
         this.accordionName = accordionName;
-    }
-
-    /**
-     * Get the value of to the current object list.
-     * @return the objectList
-     */
-    public ArrayList<Object> getObjectList() {
-        return objectList;
-    }
-
-    /**
-     * Set the value of to the current object list.
-     * @param objectList
-     *            the objectList to set
-     */
-    public void setObjectList(final ArrayList<Object> objectList) {
-        this.objectList = objectList;
-    }
-
-    /**
-     * Add an object to the current object list.
-     * @param obj
-     *            the object to add
-     */
-    public void addObject(final Object obj) {
-        this.objectList.add(obj);
     }
 }

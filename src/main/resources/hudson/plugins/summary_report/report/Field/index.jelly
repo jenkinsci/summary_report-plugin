@@ -23,22 +23,13 @@ THE SOFTWARE.
 -->
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core">
-    <div class="col">
-        <j:set var="fieldId" value="${it.id}"/>
-        <div class="mb-3">
-            <label class="form-label" for="${fieldId}">${it.fieldName}</label>
-            <input
-              class="form-control"
-              type="text"
-              name="chartType-commit-statistics"
-              id="${fieldId}" value="${it.fieldValue}"
-              readonly="true"/>
-            <j:if test="${it.cdata != null}">
-                <pre style="color:${it.fontColor}; font-weight:${it.fontAttribute};" class="jenkins-!-padding-2 jenkins-!-margin-top-1 overflow-auto">
-                    <j:out value="${app.markupFormatter.translate(it.cdata)}"/>
-                </pre>
-            </j:if>
-        </div>
+    <j:set var="fieldId" value="${it.id}"/>
+    <div class="row ${it.padding} ${it.margin}">
+        <label class="form-label" for="${fieldId}">${it.fieldName}</label>
+        <input class="form-control" type="text" name="${fieldId}" id="${fieldId}" value="${it.fieldValue}" readonly="true"/>
+        <j:out value="${it.htmlData}"/>
     </div>
+
+    
 
 </j:jelly>

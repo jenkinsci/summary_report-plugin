@@ -28,68 +28,30 @@ THE SOFTWARE.
     xmlns:l="/lib/layout"
     xmlns:t="/lib/hudson"
     xmlns:f="/lib/form"
-    xmlns:p="/lib/hudson/project">
+    xmlns:p="/lib/hudson/project"
+    xmlns:bs="/bootstrap5">
 
+    <st:adjunct includes="io.jenkins.plugins.bootstrap5"/>
     <j:if test="${from.isShownOnProjectPage() == true}">
 
-        <!-- Import library -->
-        <!-- <st:include page="/style/buildSummaryCss.jelly" /> -->
-        <link type="text/css" href="${rootURL}/plugin/summary_report/lib/jquery/css/smoothness/jquery-ui-1.8.6.custom.css" rel="stylesheet" />
-
-        <link type="text/css" href="${rootURL}/plugin/summary_report/css/summary_report.css" rel="stylesheet" />
-        <script type="text/javascript" src="${rootURL}/plugin/summary_report/lib/jquery/js/jquery-1.4.2.min.js"></script>
-        <script type="text/javascript" src="${rootURL}/plugin/summary_report/js/summary_report.js"></script>
-
-        <script type="text/javascript" src="${rootURL}/plugin/summary_report/lib/jquery/js/jquery-ui-1.8.6.custom.min.js"></script>
-        <script type="text/javascript" src="${rootURL}/plugin/summary_report/lib/jquery.cookie.js"></script>
-        <script type="text/javascript" src="${rootURL}/plugin/summary_report/lib/jquery.tablesorter.min.js"></script>
-
-        <div class="summary_report_project" align="left">
-            <h1>Result of build #${from.getLastFinishedBuild().getNumber()}</h1>
-
-            <j:set var="buildn" value="${from.getLastFinishedBuild().getNumber()}/"/>
-            <j:set var="projectname" value="${from.getProjectName()}"/>
-            <j:set var="buildnumber" value="${from.getLastFinishedBuild().getNumber()}"/>
+        <div style="min-width: 500px;" class="jenkins-!-padding-top-1" align="left">
             <!-- For each file .xml-->
-            <j:if test="${from.getReport() != null}">
-                <j:forEach var="a" items="${from.getReport().getSection()}" indexVar="indexSection">
-
-                    <h2 style="color:${a.fontColor};">${a.sectionName}</h2>
-
-                    <!-- For each object in the section -->
-                    <j:forEach var="b" items="${a.objectList}" indexVar="indexObject">
-
-                        <!-- If the object is a table -->
-                        <j:if test="${b.status == 'table'}">
-                            <st:include class="hudson.plugins.summary_report.ACIPluginBuildAction" page="componentTable.jelly" />
-                        </j:if>
-
-                        <!-- If the object is a field -->
-                        <j:if test="${b.status == 'field'}">
-                            <st:include class="hudson.plugins.summary_report.ACIPluginBuildAction" page="componentField.jelly" />
-                        </j:if>
-
-                        <!-- If the object is an accordion -->
-                        <j:if test="${b.status == 'accordion'}">
-                            <st:include class="hudson.plugins.summary_report.ACIPluginBuildAction" page="componentAccordion.jelly" />
-                        </j:if>
-
-                        <!-- If the object is a tab -->
-                        <j:if test="${b.status == 'tabs'}">
-                            <st:include class="hudson.plugins.summary_report.ACIPluginBuildAction" page="componentTabs.jelly" />
-                        </j:if>
-
-                    </j:forEach>
-
+            <j:if test="${from.report != null}">
+                <j:forEach var="component" items="${from.report.components}">
+                    <st:include page="index.jelly" it="${component}" />
                 </j:forEach>
             </j:if>
+
+
             <!-- For each fileError-->
             <j:if test="${from != null}">
                 <j:forEach var="c" items="${from.getFileError()}" indexVar="indexC">
-                    <h2 style="color:${c[0]};">${c[1]}: <a style="color:${c[2]};" href="${c[3]}">${c[5]}</a>
+                    <h2 style="color:${c[0]};">${c[1]}: <a style="color:${c[2]};" href="${c[4]}">${c[5]}</a>
                     </h2>
                 </j:forEach>
             </j:if>
         </div>
+
+
     </j:if>
 </j:jelly>

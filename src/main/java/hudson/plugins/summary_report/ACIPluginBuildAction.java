@@ -86,11 +86,11 @@ public class ACIPluginBuildAction implements Action, Serializable, StaplerProxy 
 
             String path = build.getArtifactsDir().getAbsolutePath() + File.separatorChar + currentReport;
 
-            ParserXml parseur = new ParserXml(path);
+            ParserXml parser = new ParserXml(path);
 
-            String resParse = parseur.parse();
+            String resParse = parser.parse();
             if (resParse.equals("")) {
-                this.report.addSection(parseur.result());
+                this.report.addComponent(parser.result());
             } else {
                 ArrayList<String> list = new ArrayList<String>();
                 list.add("#FF0000"); // titleColor
