@@ -34,7 +34,8 @@ THE SOFTWARE.
     <st:adjunct includes="io.jenkins.plugins.bootstrap5"/>
     <j:if test="${from.isShownOnProjectPage() == true}">
 
-        <div style="min-width: 500px;" class="jenkins-!-padding-top-1" align="left">
+        <div class="jenkins-!-padding-top-1">
+        <div class="fluid-container">
             <!-- For each file .xml-->
             <j:if test="${from.report != null}">
                 <j:forEach var="component" items="${from.report.components}">
@@ -50,6 +51,7 @@ THE SOFTWARE.
                     </h2>
                 </j:forEach>
             </j:if>
+        </div>
         </div>
 
 

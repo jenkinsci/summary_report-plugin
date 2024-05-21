@@ -23,19 +23,27 @@ THE SOFTWARE.
 -->
 <?jelly escape-by-default='true'?>
 <j:jelly xmlns:j="jelly:core"
-        xmlns:d="jelly:define"
-        xmlns:l="/lib/layout"
-        xmlns:t="/lib/hudson"
-        xmlns:f="/lib/form"
-        xmlns:st="jelly:stapler">
+    xmlns:l="/lib/layout"
+    xmlns:st="jelly:stapler"
+    xmlns:bs="/bootstrap5">
+    <st:adjunct includes="io.jenkins.plugins.bootstrap5"/>
+    <tr>
+        <td/>
+        <td colspan="3">
+            <div class="container-fluid jenkins-!-padding-0">
+                <!-- For each file .xml-->
+                <j:forEach var="component" items="${it.report.components}">
+                    <st:include page="index.jelly" it="${component}" />
+                </j:forEach>
 
-        <l:layout title="${it.displayName}" type="one-column">
-                <st:include it="${it.project}" page="sidepanel.jelly"/>
-                <l:main-panel>
-
-
-                </l:main-panel>
-        </l:layout>
-
-
+                <!-- For each fileError-->
+                <j:if test="${from != null}">
+                    <j:forEach var="c" items="${from.getFileError()}" indexVar="indexC">
+                        <h2 style="color:${c[0]};">${c[1]}: <a style="color:${c[2]};" href="${c[4]}">${c[5]}</a>
+                        </h2>
+                    </j:forEach>
+                </j:if>
+            </div>
+        </td>
+    </tr>
 </j:jelly>
