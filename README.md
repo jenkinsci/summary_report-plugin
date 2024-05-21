@@ -251,3 +251,7 @@ Content allowed for nn accordion:
     </accordion>
 </section
 
+----
+## License
+
+All source code is licensed under the [MIT license](LICENSE)
