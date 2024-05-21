@@ -1,11 +1,11 @@
 # Jenkins Summary Display Plugin
 
-[![Jenkins Plugin](https://img.shields.io/jenkins/plugin/v/summary_report-plugin.svg)](https://plugins.jenkins.io/summary_report-plugin)
-[![GitHub release](https://img.shields.io/github/release/jenkinsci/summary_report-plugin-plugin.svg?label=release)](https://github.com/jenkinsci/summary_report-plugin-plugin/releases/latest)
-[![Jenkins Plugin Installs](https://img.shields.io/jenkins/plugin/i/summary_report-plugin.svg?color=blue)](https://plugins.jenkins.io/summary_report-plugin)
-[![Build Status](https://ci.jenkins.io/buildStatus/icon?job=Plugins%2Fsummary_report-plugin-plugin%2Fmaster)](https://ci.jenkins.io/job/Plugins/job/summary_report-plugin-plugin/job/master/)
-[![GitHub license](https://img.shields.io/github/license/jenkinsci/summary_report-plugin-plugin.svg)](https://github.com/jenkinsci/summary_report-plugin-plugin/blob/master/LICENSE.txt)
-[![Maintenance](https://img.shields.io/maintenance/yes/2023.svg)](https://github.com/jenkinsci/summary_report-plugin-plugin)
+[![Jenkins Plugin](https://img.shields.io/jenkins/plugin/v/summary_report.svg)](https://plugins.jenkins.io/summary_report-plugin)
+<!--[![GitHub release](https://img.shields.io/github/release/jenkinsci/summary_report-plugin-plugin.svg?label=release)](https://github.com/jenkinsci/summary_report-plugin-plugin/releases/latest) -->
+[![Jenkins Plugin Installs](https://img.shields.io/jenkins/plugin/i/summary_report.svg?color=blue)](https://plugins.jenkins.io/summary_report-plugin)
+[![Build Status](https://ci.jenkins.io/buildStatus/icon?job=Plugins%2Fsummary_report-plugin%2Fmaster)](https://ci.jenkins.io/job/Plugins/job/summary_report-plugin-plugin/job/master/)
+[![GitHub license](https://img.shields.io/github/license/jenkinsci/summary_report-plugin.svg)](https://github.com/jenkinsci/summary_report-plugin-plugin/blob/master/LICENSE)
+[![Maintenance](https://img.shields.io/maintenance/yes/2024.svg)](https://github.com/jenkinsci/summary_report-plugin-plugin)
 
 This plugin allows an easy and fully customized build report display on both the project page en build page.
 
