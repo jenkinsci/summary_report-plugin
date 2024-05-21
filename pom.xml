@@ -11,7 +11,7 @@
 
   <groupId>org.jenkins-ci.plugins</groupId>
   <artifactId>summary_report</artifactId>
-  <version>${revision}${changelist}</version>
+  <version>${changelist}</version>
   <packaging>hpi</packaging>
   <name>Summary Display Plugin</name>
   <url>https://github.com/jenkinsci/${project.artifactId}-plugin</url>
@@ -48,8 +48,6 @@
   </scm>
 
   <properties>
-    <revision>1.16</revision>
-    <changelist>-SNAPSHOT</changelist>
     <gitHubRepo>jenkinsci/summary_report-plugin</gitHubRepo>
     <changelist>999999-SNAPSHOT</changelist>
     <jenkins.version>2.414.3</jenkins.version>
