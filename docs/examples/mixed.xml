@@ -7,7 +7,7 @@
 		...Some more text...
 	 ]]>
 </field>
-<table sorttable="yes">
+<table sortable="yes">
         <tr>
                 <td value="Col1"/>
                 <td value="Col2"/>

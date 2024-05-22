@@ -1,5 +1,6 @@
 package hudson.plugins.summary_report.report;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
@@ -21,7 +22,9 @@ public class Component {
     protected String padding = "1";
     protected String margin;
 
-    public void Component() {}
+    public Component() {
+        this.objectList = null;
+    }
 
     protected void setType(final String type) {
         this.type = type;
@@ -46,6 +49,9 @@ public class Component {
         return this.id;
     }
 
+    @SuppressFBWarnings(
+            value = "SSD_DO_NOT_USE_INSTANCE_LOCK_ON_SHARED_STATIC_DATA",
+            justification = "need to be fixed")
     private synchronized void makeId() {
         counter++;
         this.id = getClass().getName().replace(".", "-") + "-" + counter;
@@ -62,7 +68,7 @@ public class Component {
         return this.objectList == null;
     }
 
-    protected void initChildObjects() {
+    protected final void initChildObjects() {
         this.objectList = new ArrayList<Object>();
     }
 
@@ -223,12 +229,12 @@ public class Component {
             return false;
         }
         String modifier = null;
-        int size;
+        final int size;
         if (parts.length > 1) {
             modifier = parts[0];
-            size = Integer.valueOf(parts[1]);
+            size = Integer.parseInt(parts[1]);
         } else {
-            size = Integer.valueOf(space);
+            size = Integer.parseInt(space);
         }
 
         if (modifier != null

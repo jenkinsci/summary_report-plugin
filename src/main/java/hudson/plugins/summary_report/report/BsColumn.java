@@ -31,7 +31,7 @@ public class BsColumn extends Component {
     /**
      * Get the grid width of the column.
      * See also https://getbootstrap.com/docs/5.1/layout/grid/
-     * @return the accordionName
+     * @return the grid width
      */
     public String getGridWidth() {
         if (gridWidth == null || gridWidth.isEmpty()) {
@@ -41,13 +41,13 @@ public class BsColumn extends Component {
     }
 
     /**
-     * Set the name of the accordion.
-     * @param accordionName
-     *		the accordionName to set
+     * Set the grid width.
+     * @param gridWidth
+     *		width of the grid
      */
     public void setGridWidth(final String gridWidth) {
 
-        final int widthValue = Integer.valueOf(gridWidth);
+        final int widthValue = Integer.parseInt(gridWidth);
         if (widthValue < 1 || widthValue > 12) {
             LOGGER.warning("Invalid parameter grid-width (" + gridWidth + ") in object " + this.toString());
             return;

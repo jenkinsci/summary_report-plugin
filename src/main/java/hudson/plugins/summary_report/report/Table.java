@@ -32,10 +32,10 @@ import org.xml.sax.SAXException;
  */
 public class Table extends Component {
 
-    private static long counter;
-    private String id = null;
+    // private static long counter;
+    // private String id = null;
     private ArrayList<Tr> trList;
-    private String sorttable;
+    private String sortable;
 
     /**
      * Constructor.
@@ -50,7 +50,8 @@ public class Table extends Component {
 
         super.init(attributes);
 
-        this.setSorttable(attributes.getValue("sorttable"));
+        // @TODO do we need it, We shall provide some solution to enable more options from data-table-plugin
+        this.setSortable(attributes.getValue("sortable"));
     }
 
     /**
@@ -72,19 +73,19 @@ public class Table extends Component {
 
     /**
      * Return if the table can be sorted.
-     * @return the sorttable
+     * @return the sortable
      */
-    public String getSorttable() {
-        return sorttable;
+    public String getSortable() {
+        return sortable;
     }
 
     /**
      * Set the current table sortable.
-     * @param sorttable
-     * 		the sorttable to set
+     * @param sortable
+     * 		the sortable to set
      */
-    public void setSorttable(final String sorttable) {
-        this.sorttable = sorttable;
+    public void setSortable(final String sortable) {
+        this.sortable = sortable;
     }
 
     /**

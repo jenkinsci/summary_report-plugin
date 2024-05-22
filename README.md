@@ -109,7 +109,7 @@ Example:
 Tables are created using *\<table\> ... \</table\>* tags.  
 Fields attributes are:
 
--   ***sorttable="yes"****:* Each column become sortableTable structure:
+-   ***sortable="yes"****:* Each column become sortableTable structure:
 -   Lines are created using *\<tr\>...\</tr\>* tags.
 -   Column are created using *\<td\>...\</td\>* tags.
 
@@ -149,7 +149,7 @@ Attributes of a cell are:
 Example:
 
 ``` syntaxhighlighter-pre
-<table sorttable="yes">
+<table sortable="yes">
         <tr>
                 <td value="Table title" bgcolor="red" fontcolor="black" fontattribute="bold" href="report.xls" align="center" width="200"/>
                 <td value="Column 1" bgcolor="white" fontcolor="black" fontattribute="normal" href="" align="center" width="200"/>

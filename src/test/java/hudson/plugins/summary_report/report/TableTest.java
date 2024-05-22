@@ -14,20 +14,20 @@ public class TableTest {
     public TableTest() {}
 
     /**
-     * Test of Sorttable methods, of class Table.
+     * Test of Sortable methods, of class Table.
      */
     @Test
-    public void testSorttable() {
-        String expResult = "Sorttable";
+    public void testSortable() {
+        String expResult = "Sortable";
         Table instance = new Table();
 
         // Test of getter
-        assertEquals(null, instance.getSorttable());
+        assertEquals(null, instance.getSortable());
 
-        instance.setSorttable(expResult);
+        instance.setSortable(expResult);
 
         // Test of setter
-        assertEquals(expResult, instance.getSorttable());
+        assertEquals(expResult, instance.getSortable());
     }
 
     /**

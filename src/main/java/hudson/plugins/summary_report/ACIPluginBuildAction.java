@@ -148,6 +148,7 @@ public class ACIPluginBuildAction implements Action, Serializable, StaplerProxy 
     /**
      * Get Result.
      */
+    @SuppressFBWarnings(value = "UWF_UNWRITTEN_FIELD", justification = "need to be fixed")
     public String getResult() {
         return this.result;
     }

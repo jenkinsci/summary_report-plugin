@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <section name="Performance Summary" line="0" column="0">
     
-    <table sorttable="yes">
+    <table sortable="yes">
         <tr>
             <td value="Col1"/>
             <td value="Col2"/>
