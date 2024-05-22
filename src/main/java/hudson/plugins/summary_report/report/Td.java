@@ -23,10 +23,13 @@
  */
 package hudson.plugins.summary_report.report;
 
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
+
 /**
  * Class responsible for a table column creation.
  */
-public class Td {
+public class Td extends Component {
     private String tdValue;
     private String bgColor;
     private String fontColor;
@@ -34,15 +37,30 @@ public class Td {
     private String href;
     private String width;
     private String align;
-    private String cdata;
     private String title;
 
     /**
      * Constructor.
      */
     public Td() {
+        this.setType("td");
         this.width = "100";
         this.align = "left";
+    }
+
+    @Override
+    public void init(final Attributes attributes) throws SAXException {
+
+        super.init(attributes);
+
+        this.setTdValue(attributes.getValue("value"));
+        this.setBgColor(attributes.getValue("bgcolor"));
+        this.setFontColor(attributes.getValue("fontcolor"));
+        this.setFontAttribute(attributes.getValue("fontattribute"));
+        this.setTitle(attributes.getValue("title"));
+        this.setHref(attributes.getValue("href"));
+        this.setAlign(attributes.getValue("align"));
+        this.setWidth(attributes.getValue("width"));
     }
 
     /**
@@ -179,26 +197,5 @@ public class Td {
      */
     public void setAlign(final String align) {
         this.align = align;
-    }
-
-    /**
-     * Get the cdata section.
-     * @return the cdata
-     */
-    public String getCdata() {
-        return cdata;
-    }
-
-    /**
-     * Set cdata section.
-     * @param cdata
-     *            the cdata to set
-     */
-    public void setCdata(final String cdata) {
-        if (this.cdata == null) {
-            this.cdata = cdata;
-        } else {
-            this.cdata = this.cdata + cdata;
-        }
     }
 }

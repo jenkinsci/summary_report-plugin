@@ -23,25 +23,31 @@
  */
 package hudson.plugins.summary_report.report;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import java.util.ArrayList;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
 
 /**
  * Class responsible for a section creation.
  */
-public class Section {
+public class Section extends Component {
 
     private String sectionName;
-    private String line;
-    private String column;
-    private ArrayList<Object> objectList;
-    private String fontColor;
 
     /**
      * Constructor.
      */
     public Section() {
-        objectList = new ArrayList<Object>();
+        this.setType("section");
+        this.initChildObjects();
+    }
+
+    @Override
+    public void init(final Attributes attributes) throws SAXException {
+
+        this.padding = "0";
+        super.init(attributes);
+
+        this.setSectionName(attributes.getValue("name"));
     }
 
     /**
@@ -59,83 +65,5 @@ public class Section {
      */
     public void setSectionName(final String sectionName) {
         this.sectionName = sectionName;
-    }
-
-    /**
-     * Get the current line.
-     * @return the line
-     */
-    public String getLine() {
-        return line;
-    }
-
-    /**
-     * Set the current line.
-     * @param line
-     *            the line to set
-     */
-    public void setLine(final String line) {
-        this.line = line;
-    }
-
-    /**
-     * Get the current column.
-     * @return the column
-     */
-    public String getColumn() {
-        return column;
-    }
-
-    /**
-     * Set the current column.
-     * @param column
-     *            the column to set
-     */
-    public void setColumn(final String column) {
-        this.column = column;
-    }
-
-    /**
-     * Get the current object list.
-     * @return the objectList
-     */
-    public ArrayList<Object> getObjectList() {
-        return objectList;
-    }
-
-    /**
-     * Set the current object list.
-     * @param objectList
-     *            the objectList to set
-     */
-    public void setObjectList(final ArrayList<Object> objectList) {
-        this.objectList = objectList;
-    }
-
-    /**
-     * Add an object to the current object list.
-     * @param obj
-     *		The object to add
-     */
-    public void addObject(final Object obj) {
-        this.objectList.add(obj);
-    }
-
-    /**
-     * Get font attribute.
-     * @return the fontColor
-     */
-    @SuppressFBWarnings(value = "NM_CONFUSING", justification = "need to be fixed")
-    public String getfontColor() {
-        return fontColor;
-    }
-
-    /**
-     * Set font attribute.
-     * @param fontColor
-     *            the fontColor to set
-     */
-    public void setFontColor(final String fontColor) {
-        this.fontColor = fontColor;
     }
 }

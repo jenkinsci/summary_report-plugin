@@ -1,0 +1,65 @@
+<!--
+The MIT License
+
+Copyright 2023 Martin Pokorny.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-->
+<?jelly escape-by-default='true'?>
+<j:jelly xmlns:j="jelly:core"
+  xmlns:st="jelly:stapler">
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs ${it.padding} ${it.margin}" role="tablist" id="${it.id}">
+    <j:forEach var="tab" items="${it.tabList}" indexVar="tabIndex">
+      <j:set var="tabId" value="${tab.id}"/>
+      <j:set var="extraClass" value=""/>
+      <j:set var="selected" value="false"/>
+      <j:if test="${tabIndex == 0}">
+        <j:set var="extraClass" value="active"/>
+        <j:set var="selected" value="true"/>
+      </j:if>
+
+      <li class="nav-item" role="presentation">
+        <button class="nav-link ${extraClass}" id="${tabId}-tab" data-bs-toggle="tab" data-bs-target="#${tabId}" type="button" role="tab" aria-controls="${tabId}" aria-selected="${selected}">${tab.tabName}</button>
+      </li>
+    </j:forEach>
+  </ul>
+
+  <!-- Tab panes -->
+
+  <div class="tab-content" id="${it.id}-content">
+    <j:forEach var="tab" items="${it.tabList}" indexVar="tabIndex">
+      <j:set var="tabId" value="${tab.id}"/>
+      <j:set var="extraClass" value=""/>
+      <j:if test="${tabIndex == 0}">
+        <j:set var="extraClass" value="show active"/>
+      </j:if>
+      <div class="tab-content">
+        <div class="tab-pane jenkins-!-margin-top-1 ${extraClass}" id="${tabId}" role="tabpanel" aria-labelledby="${tabId}-tab">
+          <div class="row py-3">
+            <j:forEach var="object" items="${tab.objectList}">
+              <st:include page="index.jelly" it="${object}" />
+            </j:forEach>
+          </div>
+        </div>
+      </div>
+    </j:forEach>
+  </div>
+</j:jelly>

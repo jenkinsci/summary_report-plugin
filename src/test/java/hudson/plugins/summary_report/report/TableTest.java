@@ -14,38 +14,20 @@ public class TableTest {
     public TableTest() {}
 
     /**
-     * Test of Status methods, of class Table.
+     * Test of Sortable methods, of class Table.
      */
     @Test
-    public void testStatus() {
-        String expResult = "tableTest";
+    public void testSortable() {
+        String expResult = "Sortable";
         Table instance = new Table();
 
         // Test of getter
-        // In default value, status of new instance of Table is table
-        assertEquals("table", instance.getStatus());
+        assertEquals(null, instance.getSortable());
 
-        instance.setStatus(expResult);
-
-        // Test of setter
-        assertEquals(expResult, instance.getStatus());
-    }
-
-    /**
-     * Test of Sorttable methods, of class Table.
-     */
-    @Test
-    public void testSorttable() {
-        String expResult = "Sorttable";
-        Table instance = new Table();
-
-        // Test of getter
-        assertEquals(null, instance.getSorttable());
-
-        instance.setSorttable(expResult);
+        instance.setSortable(expResult);
 
         // Test of setter
-        assertEquals(expResult, instance.getSorttable());
+        assertEquals(expResult, instance.getSortable());
     }
 
     /**

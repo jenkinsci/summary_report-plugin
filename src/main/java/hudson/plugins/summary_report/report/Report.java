@@ -31,42 +31,32 @@ import java.util.ArrayList;
  */
 public class Report {
 
-    private ArrayList<Section> reportSection;
+    private ArrayList<Component> components;
 
     /**
-     * Initialize the section.
+     * Initialize the component.
      */
     public Report() {
-        reportSection = new ArrayList<Section>();
+        this.components = new ArrayList<Component>();
     }
 
     /**
-     * Return the current list of section.
+     * Return the current list of component.
      *
-     * @return section
-     * 		the current section list
+     * @return component
+     * 		the current component list
      */
-    public ArrayList<Section> getSection() {
-        return reportSection;
+    public ArrayList<Component> getComponents() {
+        return this.components;
     }
 
     /**
-     * Assign a section list to the report.
+     * Add a new component to the report.
      *
-     * @param section
-     * 		the section list to set
+     * @param component
+     * 		The component to add in the list of components
      */
-    public void setSection(final ArrayList<Section> section) {
-        this.reportSection = section;
-    }
-
-    /**
-     * Add a new section to the report.
-     *
-     * @param section
-     * 		The section to add in the list of sections
-     */
-    public void addSection(final Section section) {
-        this.reportSection.add(section);
+    public void addComponent(final Component component) {
+        this.components.add(component);
     }
 }

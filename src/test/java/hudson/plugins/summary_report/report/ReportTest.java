@@ -14,45 +14,36 @@ public class ReportTest {
     public ReportTest() {}
 
     /**
-     * Test of Section methods, of class Report.
+     * Test of Component methods, of class Report.
      */
     @Test
-    public void testSection() {
+    public void testComponent() {
 
         Report instance = new Report();
 
-        ArrayList<Section> section = new ArrayList<Section>();
+        ArrayList<Component> component = new ArrayList<Component>();
 
-        Section section1 = new Section();
-        Section section2 = new Section();
+        Component component1 = new Component();
+        Component component2 = new Component();
 
-        assertNotSame(section1, section2);
+        assertNotSame(component1, component2);
 
         /**************/
         /** Phase 1  **/
         /**************/
         // Test of getter
-        assertEquals(section, instance.getSection());
+        assertEquals(component, instance.getComponents());
 
         /**************/
         /** Phase 2  **/
         /**************/
-        section.add(section1);
-        section.add(section2);
+        component.add(component1);
+        component.add(component2);
 
-        instance.setSection(section);
+        instance.addComponent(component1);
+        instance.addComponent(component2);
 
         // Test of setter
-        assertEquals(section, instance.getSection());
-
-        /**************/
-        /** Phase 3  **/
-        /**************/
-        Report instance2 = new Report();
-
-        instance2.addSection(section1);
-        instance2.addSection(section2);
-
-        assertEquals(section, instance.getSection());
+        assertEquals(component, instance.getComponents());
     }
 }

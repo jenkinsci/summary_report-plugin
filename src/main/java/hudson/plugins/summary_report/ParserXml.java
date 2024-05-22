@@ -26,7 +26,13 @@ package hudson.plugins.summary_report;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import hudson.plugins.summary_report.report.Accordion;
+import hudson.plugins.summary_report.report.BsCard;
+import hudson.plugins.summary_report.report.BsColumn;
+import hudson.plugins.summary_report.report.BsContainer;
+import hudson.plugins.summary_report.report.BsRow;
+import hudson.plugins.summary_report.report.Component;
 import hudson.plugins.summary_report.report.Field;
+import hudson.plugins.summary_report.report.HtmlContent;
 import hudson.plugins.summary_report.report.Section;
 import hudson.plugins.summary_report.report.Tab;
 import hudson.plugins.summary_report.report.Table;
@@ -35,6 +41,9 @@ import hudson.plugins.summary_report.report.Td;
 import hudson.plugins.summary_report.report.Tr;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -47,7 +56,8 @@ import org.xml.sax.helpers.DefaultHandler;
  */
 public class ParserXml {
 
-    private static Section resultat;
+    private static final Logger LOGGER = Logger.getLogger(ParserXml.class.getName());
+    private static Component result;
     private static String xmlPath;
     /**
      * XML Parser.
@@ -65,10 +75,10 @@ public class ParserXml {
      */
     public String parse() {
         try {
-            final SAXParserFactory fabrique = SAXParserFactory.newInstance();
-            final SAXParser parseur = fabrique.newSAXParser();
-            final DefaultHandler gestionnaire = new Analyse();
-            parseur.parse(new File(xmlPath), gestionnaire);
+            final SAXParserFactory factory = SAXParserFactory.newInstance();
+            final SAXParser parser = factory.newSAXParser();
+            final DefaultHandler handler = new Analyse();
+            parser.parse(new File(xmlPath), handler);
         } catch (ParserConfigurationException pce) {
             return pce.toString();
         } catch (SAXException sax) {
@@ -80,10 +90,10 @@ public class ParserXml {
     }
 
     /**
-     * Return result of the section.
+     * Return root component.
      */
-    public Section result() {
-        return resultat;
+    public Component result() {
+        return result;
     }
 
     /**
@@ -91,96 +101,42 @@ public class ParserXml {
      */
     static class Analyse extends DefaultHandler {
 
-        private Section section;
-        private Tabs tmpTabs;
-        private Tab tmpTab;
-        private Field tmpField;
-        private Table tmpTable;
-        private Tr tmpTr;
-        private Td tmpTd;
-        private Accordion tmpAccordion;
+        private Component rootElement = null;
 
-        /**
-         * FLAGS
-         */
-        private boolean fSection = false;
-
-        private boolean fTabs = false;
-        private boolean fTab = false;
-        private boolean fField = false;
-        private boolean fTable = false;
-        private boolean fTr = false;
-        private boolean fTd = false;
-        private boolean fAccordion = false;
+        List<Component> elements = new ArrayList<>();
 
         /**
          * Main entry point.
          */
         public Analyse() {
             super();
-            section = new Section();
         }
 
         @Override
         public void characters(final char[] ch, final int start, final int length) throws SAXException {
 
             final String lecture = new String(ch, start, length);
-
-            // if the string doesn't contain only empty charaters
+            // if the string doesn't contain only empty characters
             if (!lecture.matches("^\\s*$")) {
-                if (fField && length > 1) {
-                    tmpField.setCdata(lecture);
-                }
-                if (fTd && length > 1) {
-                    tmpTd.setCdata(lecture);
-                }
+                elements.get(elements.size() - 1).setCdata(lecture);
             }
         }
 
         @Override
         @SuppressFBWarnings(value = "ST_WRITE_TO_STATIC_FROM_INSTANCE_METHOD", justification = "need to be fixed")
         public void endDocument() throws SAXException {
-            resultat = section;
+            result = (Component) rootElement;
         }
 
         @Override
         public void endElement(final String uri, final String localName, final String qName) throws SAXException {
 
-            if (qName.equals("section") && fSection) {
-                fSection = false;
-            } else if (qName.equals("accordion") && fAccordion) {
-                fAccordion = false;
-                section.addObject(tmpAccordion);
-            } else if (qName.equals("field") && fAccordion && fField) {
-                fField = false;
-                tmpAccordion.addObject(tmpField);
-            } else if (qName.equals("table") && fAccordion && fTable) {
-                fTable = false;
-                tmpAccordion.addObject(tmpTable);
-            } else if (qName.equals("tabs") && fTabs) {
-                fTabs = false;
-                section.addObject(tmpTabs);
-            } else if (qName.equals("tab") && fTabs && fTab) {
-                fTab = false;
-                tmpTabs.addTab(tmpTab);
-            } else if (qName.equals("field") && fTabs && fTab && fField) {
-                fField = false;
-                tmpTab.addObject(tmpField);
-            } else if (qName.equals("table") && fTabs && fTab && fTable) {
-                fTable = false;
-                tmpTab.addObject(tmpTable);
-            } else if (qName.equals("field") && fField) {
-                fField = false;
-                section.addObject(tmpField);
-            } else if (qName.equals("table") && fTable) {
-                fTable = false;
-                section.addObject(tmpTable);
-            } else if (qName.equals("tr") && fTr) {
-                fTr = false;
-                tmpTable.addTr(tmpTr);
-            } else if (qName.equals("td") && fTd) {
-                fTd = false;
-                tmpTr.addTd(tmpTd);
+            Component element = elements.remove(elements.size() - 1);
+
+            if (elements.size() > 0) {
+                elements.get(elements.size() - 1).addObject(element);
+            } else {
+                rootElement = element;
             }
         }
 
@@ -188,50 +144,69 @@ public class ParserXml {
         public void startElement(
                 final String uri, final String localName, final String qName, final Attributes attributes)
                 throws SAXException {
+
+            Component element = null;
             if (qName.equals("section")) {
-                fSection = true;
-                section.setSectionName(attributes.getValue("name"));
-                section.setLine(attributes.getValue("line"));
-                section.setColumn(attributes.getValue("column"));
-                section.setFontColor(attributes.getValue("fontcolor"));
+                Section object = new Section();
+                object.init(attributes);
+                element = object;
             } else if (qName.equals("tabs")) {
-                fTabs = true;
-                tmpTabs = new Tabs();
+                Tabs object = new Tabs();
+                object.init(attributes);
+                element = object;
             } else if (qName.equals("tab")) {
-                fTab = true;
-                tmpTab = new Tab();
-                tmpTab.setTabName(attributes.getValue("name"));
+                Tab object = new Tab();
+                object.init(attributes);
+                element = object;
             } else if (qName.equals("accordion")) {
-                fAccordion = true;
-                tmpAccordion = new Accordion();
-                tmpAccordion.setAccordionName(attributes.getValue("name"));
+                Accordion object = new Accordion();
+                object.init(attributes);
+                element = object;
             } else if (qName.equals("field")) {
-                fField = true;
-                tmpField = new Field();
-                tmpField.setFieldName(attributes.getValue("name"));
-                tmpField.setFieldValue(attributes.getValue("value"));
-                tmpField.setHref(attributes.getValue("href"));
-                tmpField.setTitleColor(attributes.getValue("titlecolor"));
-                tmpField.setDetailColor(attributes.getValue("detailcolor"));
+                Field object = new Field();
+                object.init(attributes);
+                element = object;
             } else if (qName.equals("table")) {
-                fTable = true;
-                tmpTable = new Table();
-                tmpTable.setSorttable(attributes.getValue("sorttable"));
+                Table object = new Table();
+                object.init(attributes);
+                element = object;
             } else if (qName.equals("tr")) {
-                fTr = true;
-                tmpTr = new Tr();
+                Tr object = new Tr();
+                object.init(attributes);
+                element = object;
             } else if (qName.equals("td")) {
-                fTd = true;
-                tmpTd = new Td();
-                tmpTd.setTdValue(attributes.getValue("value"));
-                tmpTd.setBgColor(attributes.getValue("bgcolor"));
-                tmpTd.setFontColor(attributes.getValue("fontcolor"));
-                tmpTd.setFontAttribute(attributes.getValue("fontattribute"));
-                tmpTd.setTitle(attributes.getValue("title"));
-                tmpTd.setHref(attributes.getValue("href"));
-                tmpTd.setAlign(attributes.getValue("align"));
-                tmpTd.setWidth(attributes.getValue("width"));
+                Td object = new Td();
+                object.init(attributes);
+                element = object;
+            } else if (qName.equals("layout-container")) {
+                BsContainer object = new BsContainer();
+                object.init(attributes);
+                element = object;
+            } else if (qName.equals("layout-row")) {
+                BsRow object = new BsRow();
+                object.init(attributes);
+                element = object;
+            } else if (qName.equals("layout-column") || qName.equals("layout-col")) {
+                BsColumn object = new BsColumn();
+                object.init(attributes);
+                element = object;
+            } else if (qName.equals("html")) {
+                HtmlContent object = new HtmlContent();
+                object.init(attributes);
+                element = object;
+            } else if (qName.equals("bs-card")) {
+                BsCard object = new BsCard();
+                object.init(attributes);
+                element = object;
             }
+
+            if (element == null) {
+                // TODO throw exception here, not supported element ...
+                LOGGER.warning("Unknown element " + qName + " " + attributes);
+                element = new Component();
+            }
+
+            elements.add(element);
         }
     }
 }

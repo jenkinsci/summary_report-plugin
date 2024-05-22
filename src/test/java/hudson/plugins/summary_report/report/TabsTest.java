@@ -14,24 +14,6 @@ public class TabsTest {
     public TabsTest() {}
 
     /**
-     * Test of Status methods, of class Tabs.
-     */
-    @Test
-    public void testStatus() {
-        String expResult = "tabsTest";
-        Tabs instance = new Tabs();
-
-        // Test of getter
-        // In default value, status of new instance of Tabs is tabs
-        assertEquals("tabs", instance.getStatus());
-
-        instance.setStatus(expResult);
-
-        // Test of setter
-        assertEquals(expResult, instance.getStatus());
-    }
-
-    /**
      * Test of TabList methods, of class Tabs.
      */
     @Test

@@ -23,15 +23,16 @@
  */
 package hudson.plugins.summary_report.report;
 
-/**
- * Class responsible for a accordion creation.
- */
-public class Field {
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
 
-    private String status;
+/**
+ * Class responsible for a field creation.
+ */
+public class Field extends Component {
+
     private String fieldName;
     private String fieldValue;
-    private String cdata;
     private String href;
     private String titleColor;
     private String detailColor;
@@ -40,24 +41,19 @@ public class Field {
      * Constructor.
      */
     public Field() {
-        status = "field";
+        this.setType("field");
     }
 
-    /**
-     * Get the status.
-     * @return the status
-     */
-    public String getStatus() {
-        return status;
-    }
+    @Override
+    public void init(final Attributes attributes) throws SAXException {
 
-    /**
-     * Set the status.
-     * @param status
-     *            the status to set
-     */
-    public void setStatus(final String status) {
-        this.status = status;
+        super.init(attributes);
+
+        this.setFieldName(attributes.getValue("name"));
+        this.setFieldValue(attributes.getValue("value"));
+        this.setHref(attributes.getValue("href"));
+        this.setTitleColor(attributes.getValue("titlecolor"));
+        this.setDetailColor(attributes.getValue("detailcolor"));
     }
 
     /**
@@ -92,27 +88,6 @@ public class Field {
      */
     public void setFieldValue(final String fieldValue) {
         this.fieldValue = fieldValue;
-    }
-
-    /**
-     * Get cdata section of the field.
-     * @return The cdata section
-     */
-    public String getCdata() {
-        return cdata;
-    }
-
-    /**
-     * Set cdata section of the field.
-     * @param cdata
-     * 		The cdata section to set
-     */
-    public void setCdata(final String cdata) {
-        if (this.cdata == null) {
-            this.cdata = cdata;
-        } else {
-            this.cdata = this.cdata + cdata;
-        }
     }
 
     /**

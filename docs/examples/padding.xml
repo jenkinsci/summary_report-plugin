@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<bs-card title="Card with fields" icon="mug-hot">
+    <field name="col 2" value="size 6" padding="4" margin="top-2"/>
+</bs-card>

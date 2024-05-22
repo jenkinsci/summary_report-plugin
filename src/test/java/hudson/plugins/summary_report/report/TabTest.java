@@ -14,24 +14,6 @@ public class TabTest {
     public TabTest() {}
 
     /**
-     * Test of Status methods, of class Tab.
-     */
-    @Test
-    public void testStatus() {
-        String expResult = "tabTest";
-        Tab instance = new Tab();
-
-        // Test of getter
-        // In default value, status of new instance of Accordion is accordion
-        assertEquals("tab", instance.getStatus());
-
-        instance.setStatus(expResult);
-
-        // Test of setter
-        assertEquals(expResult, instance.getStatus());
-    }
-
-    /**
      * Test of TabName methods, of class Tab.
      */
     @Test

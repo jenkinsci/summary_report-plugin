@@ -14,24 +14,6 @@ public class AccordionTest {
     public AccordionTest() {}
 
     /**
-     * Test of Status methods, of class Accordion.
-     */
-    @Test
-    public void testStatus() {
-        String expResult = "accordionTest";
-        Accordion instance = new Accordion();
-
-        // Test of getter
-        // In default value, status of new instance of Accordion is accordion
-        assertEquals("accordion", instance.getStatus());
-
-        instance.setStatus(expResult);
-
-        // Test of setter
-        assertEquals(expResult, instance.getStatus());
-    }
-
-    /**
      * Test of AccordionName methods, of class Accordion.
      */
     @Test

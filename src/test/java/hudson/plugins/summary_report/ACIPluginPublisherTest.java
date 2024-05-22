@@ -61,7 +61,7 @@ public class ACIPluginPublisherTest {
     @Test
     public void testBuild() throws Exception {
 
-        final boolean debug_info = false;
+        final boolean debug_info = true;
 
         /* Project creation */
         FreeStyleProject project = j.createFreeStyleProject("ProjectTestBuild");
@@ -129,13 +129,16 @@ public class ACIPluginPublisherTest {
                         assertTrue(line.contains("<report>"));
                         line = buff.readLine();
                         if (debug_info) System.out.println(line);
-                        assertTrue(line.contains("<reportSection>"));
+                        assertTrue(line.contains("<components>"));
                         line = buff.readLine();
                         if (debug_info) System.out.println(line);
                         assertTrue(line.contains("<hudson.plugins.summary__report.report.Section>"));
                         line = buff.readLine();
                         if (debug_info) System.out.println(line);
-                        assertTrue(line.contains("<sectionName>Session1</sectionName>"));
+                        assertTrue(line.contains("<id>hudson-plugins-summary_report-report-Section-1</id>"));
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
+                        assertTrue(line.contains("<type>section</type>"));
                         line = buff.readLine();
                         if (debug_info) System.out.println(line);
                         assertTrue(line.contains("<objectList>"));
@@ -144,7 +147,16 @@ public class ACIPluginPublisherTest {
                         assertTrue(line.contains("<hudson.plugins.summary__report.report.Field>"));
                         line = buff.readLine();
                         if (debug_info) System.out.println(line);
-                        assertTrue(line.contains("<status>field</status>"));
+                        assertTrue(line.contains("<id>hudson-plugins-summary_report-report-Field-2</id>"));
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
+                        assertTrue(line.contains("<type>field</type>"));
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
+                        assertTrue(line.contains("<trusted>false</trusted>"));
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
+                        assertTrue(line.contains("<padding>1</padding>"));
                         line = buff.readLine();
                         if (debug_info) System.out.println(line);
                         assertTrue(line.contains("<fieldName>Field1</fieldName>"));
@@ -159,10 +171,19 @@ public class ACIPluginPublisherTest {
                         assertTrue(line.contains("</objectList>"));
                         line = buff.readLine();
                         if (debug_info) System.out.println(line);
+                        assertTrue(line.contains("<trusted>false</trusted>"));
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
+                        assertTrue(line.contains("<padding>0</padding>"));
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
+                        assertTrue(line.contains("<sectionName>Session1</sectionName>"));
+                        line = buff.readLine();
+                        if (debug_info) System.out.println(line);
                         assertTrue(line.contains("</hudson.plugins.summary__report.report.Section>"));
                         line = buff.readLine();
                         if (debug_info) System.out.println(line);
-                        assertTrue(line.contains("</reportSection>"));
+                        assertTrue(line.contains("</components>"));
                         line = buff.readLine();
                         if (debug_info) System.out.println(line);
                         assertTrue(line.contains("</report>"));
