@@ -24,39 +24,34 @@
 package hudson.plugins.summary_report.report;
 
 import java.util.ArrayList;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
 
 /**
  * Class responsible for a table creation.
  */
-public class Table {
+public class Table extends Component {
 
-    private String status;
+    // private static long counter;
+    // private String id = null;
     private ArrayList<Tr> trList;
-    private String sorttable;
+    private String sortable;
 
     /**
      * Constructor.
      */
     public Table() {
-        trList = new ArrayList<Tr>();
-        status = "table";
+        this.setType("table");
+        this.trList = new ArrayList<Tr>();
     }
 
-    /**
-     * Get the status.
-     * @return the status
-     */
-    public String getStatus() {
-        return status;
-    }
+    @Override
+    public void init(final Attributes attributes) throws SAXException {
 
-    /**
-     * Set the status.
-     * @param status
-     *		the status to set
-     */
-    public void setStatus(final String status) {
-        this.status = status;
+        super.init(attributes);
+
+        // @TODO do we need it, We shall provide some solution to enable more options from data-table-plugin
+        this.setSortable(attributes.getValue("sortable"));
     }
 
     /**
@@ -78,19 +73,19 @@ public class Table {
 
     /**
      * Return if the table can be sorted.
-     * @return the sorttable
+     * @return the sortable
      */
-    public String getSorttable() {
-        return sorttable;
+    public String getSortable() {
+        return sortable;
     }
 
     /**
      * Set the current table sortable.
-     * @param sorttable
-     * 		the sorttable to set
+     * @param sortable
+     * 		the sortable to set
      */
-    public void setSorttable(final String sorttable) {
-        this.sorttable = sorttable;
+    public void setSortable(final String sortable) {
+        this.sortable = sortable;
     }
 
     /**
@@ -100,5 +95,20 @@ public class Table {
      */
     public void addTr(final Tr tr) {
         this.trList.add(tr);
+    }
+
+    /**
+     * Add an object to the current object list.
+     * @param obj
+     *            the object to add
+     */
+    @Override
+    public void addObject(final Object obj) {
+        this.addTr((Tr) obj);
+    }
+
+    @Override
+    public boolean isPrimitive() {
+        return false;
     }
 }

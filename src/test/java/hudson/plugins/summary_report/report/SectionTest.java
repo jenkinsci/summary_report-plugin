@@ -31,40 +31,6 @@ public class SectionTest {
     }
 
     /**
-     * Test of Line methods, of class Section.
-     */
-    @Test
-    public void testLine() {
-        String expResult = "Line";
-        Section instance = new Section();
-
-        // Test of getter
-        assertEquals(null, instance.getLine());
-
-        instance.setLine(expResult);
-
-        // Test of setter
-        assertEquals(expResult, instance.getLine());
-    }
-
-    /**
-     * Test of Column methods, of class Section.
-     */
-    @Test
-    public void testColumn() {
-        String expResult = "Column";
-        Section instance = new Section();
-
-        // Test of getter
-        assertEquals(null, instance.getColumn());
-
-        instance.setColumn(expResult);
-
-        // Test of setter
-        assertEquals(expResult, instance.getColumn());
-    }
-
-    /**
      * Test of ObjectList methods, of class Section.
      */
     @Test

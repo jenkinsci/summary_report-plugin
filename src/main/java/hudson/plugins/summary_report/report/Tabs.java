@@ -24,38 +24,28 @@
 package hudson.plugins.summary_report.report;
 
 import java.util.ArrayList;
+import org.xml.sax.Attributes;
+import org.xml.sax.SAXException;
 
 /**
  * Class responsible for a set of tab creation.
  */
-public class Tabs {
+public class Tabs extends Component {
 
-    private String status;
     private ArrayList<Tab> tabList;
 
     /**
      * Constructor.
      */
     public Tabs() {
+        this.setType("tabs");
         tabList = new ArrayList<Tab>();
-        status = "tabs";
     }
 
-    /**
-     * Get the status.
-     * @return the status
-     */
-    public String getStatus() {
-        return status;
-    }
+    @Override
+    public void init(final Attributes attributes) throws SAXException {
 
-    /**
-     * Set the status.
-     * @param status
-     *		the status to set
-     */
-    public void setStatus(final String status) {
-        this.status = status;
+        super.init(attributes);
     }
 
     /**
@@ -82,5 +72,15 @@ public class Tabs {
      */
     public void addTab(final Tab obj) {
         this.tabList.add(obj);
+    }
+
+    /**
+     * Add an object to the current object list.
+     * @param obj
+     *            the object to add
+     */
+    @Override
+    public void addObject(final Object obj) {
+        this.addTab((Tab) obj);
     }
 }

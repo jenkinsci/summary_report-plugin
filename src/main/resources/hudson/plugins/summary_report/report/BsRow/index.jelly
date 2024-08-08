@@ -1,0 +1,11 @@
+<?jelly escape-by-default='true'?>
+<j:jelly
+    xmlns:j="jelly:core"
+    xmlns:st="jelly:stapler">
+    <div class="row ${it.padding} ${it.margin}">
+        <j:forEach var="object" items="${it.objectList}" indexVar="indexObject">
+            <st:include page="index.jelly" it="${object}" />
+        </j:forEach>
+    </div>
+
+</j:jelly>

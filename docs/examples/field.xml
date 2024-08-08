@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<field name="Field Name To Display" titlecolor="black" value="My Field Value" detailcolor="#000000" href="artifacts/field.txt">
+    <![CDATA[
+....TEXT....
+<a href="http://....">Link to something</a>
+<a href="https://github.com/jenkinsci/summary_report-plugin">Link to something</a>
+...Some more text...
+]]>
+</field>

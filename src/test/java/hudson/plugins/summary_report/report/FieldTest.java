@@ -13,24 +13,6 @@ public class FieldTest {
     public FieldTest() {}
 
     /**
-     * Test of Status methods, of class Field.
-     */
-    @Test
-    public void testStatus() {
-        String expResult = "fieldTest";
-        Field instance = new Field();
-
-        // Test of getter
-        // In default value, status of new instance of Field is field
-        assertEquals("field", instance.getStatus());
-
-        instance.setStatus(expResult);
-
-        // Test of setter
-        assertEquals(expResult, instance.getStatus());
-    }
-
-    /**
      * Test of FieldName methods, of class Field.
      */
     @Test

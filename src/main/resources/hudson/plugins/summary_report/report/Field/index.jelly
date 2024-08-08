@@ -22,38 +22,14 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 -->
 <?jelly escape-by-default='true'?>
-<j:jelly xmlns:j="jelly:core"
-    xmlns:st="jelly:stapler"
-    xmlns:d="jelly:define"
-    xmlns:l="/lib/layout"
-    xmlns:t="/lib/hudson"
-    xmlns:f="/lib/form"
-    xmlns:p="/lib/hudson/project"
-    xmlns:bs="/bootstrap5">
+<j:jelly xmlns:j="jelly:core">
+    <j:set var="fieldId" value="${it.id}"/>
+    <div class="row ${it.padding} ${it.margin}">
+        <label class="form-label" for="${fieldId}">${it.fieldName}</label>
+        <input class="form-control" type="text" name="${fieldId}" id="${fieldId}" value="${it.fieldValue}" readonly="true"/>
+        <j:out value="${it.htmlData}"/>
+    </div>
 
-    <st:adjunct includes="io.jenkins.plugins.bootstrap5"/>
-    <j:if test="${from.isShownOnProjectPage() == true}">
+    
 
-        <div class="jenkins-!-padding-top-1">
-        <div class="fluid-container">
-            <!-- For each file .xml-->
-            <j:if test="${from.report != null}">
-                <j:forEach var="component" items="${from.report.components}">
-                    <st:include page="index.jelly" it="${component}" />
-                </j:forEach>
-            </j:if>
-
-
-            <!-- For each fileError-->
-            <j:if test="${from != null}">
-                <j:forEach var="c" items="${from.getFileError()}" indexVar="indexC">
-                    <h2 style="color:${c[0]};">${c[1]}: <a style="color:${c[2]};" href="${c[4]}">${c[5]}</a>
-                    </h2>
-                </j:forEach>
-            </j:if>
-        </div>
-        </div>
-
-
-    </j:if>
 </j:jelly>
